@@ -1,6 +1,7 @@
 package com.leehw.sbly.web;
 
 import com.leehw.sbly.config.auth.Dto.SessionMember;
+import com.leehw.sbly.config.auth.LoginMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +16,7 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model){
-        SessionMember member = (SessionMember) httpSession.getAttribute("member");
+    public String index(Model model, @LoginMember SessionMember member){
 
         if(member != null)
             model.addAttribute("memberName", member.getName());
