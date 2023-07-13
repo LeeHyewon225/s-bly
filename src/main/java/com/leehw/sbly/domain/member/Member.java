@@ -1,5 +1,6 @@
 package com.leehw.sbly.domain.member;
 
+import com.leehw.sbly.domain.cart.Cart;
 import com.leehw.sbly.domain.order.Orders;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +31,9 @@ public class Member{
 
     @OneToMany(mappedBy = "member")
     private List<Orders> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Cart> carts = new ArrayList<>();
 
     @Builder
     public Member(String email, String name, int money){

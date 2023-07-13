@@ -1,5 +1,6 @@
 package com.leehw.sbly.domain.goods;
 
+import com.leehw.sbly.domain.cart.Cart;
 import com.leehw.sbly.domain.order.Orders;
 import lombok.Builder;
 import lombok.Getter;
@@ -39,6 +40,9 @@ public class Goods {
 
     @OneToMany(mappedBy = "goods")
     private List<Orders> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "goods")
+    private List<Cart> carts = new ArrayList<>();
 
     @Builder
     public Goods(String name, int price, String image, int main_category, int sub_category, int delivery_time){
