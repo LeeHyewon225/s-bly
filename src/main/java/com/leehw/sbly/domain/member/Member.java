@@ -1,11 +1,13 @@
 package com.leehw.sbly.domain.member;
 
-import com.leehw.sbly.domain.BaseTimeEntity;
+import com.leehw.sbly.domain.order.Orders;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -14,6 +16,7 @@ public class Member{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
 
     @Column(nullable = false)
@@ -24,6 +27,9 @@ public class Member{
 
     @Column
     private int money;
+
+    @OneToMany(mappedBy = "member")
+    private List<Orders> orders = new ArrayList<>();
 
     @Builder
     public Member(String email, String name, int money){

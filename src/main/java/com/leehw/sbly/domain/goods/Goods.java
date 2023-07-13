@@ -1,10 +1,13 @@
 package com.leehw.sbly.domain.goods;
 
+import com.leehw.sbly.domain.order.Orders;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -13,6 +16,7 @@ public class Goods {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "goods_id")
     private long id;
 
     @Column(nullable = false)
@@ -32,6 +36,9 @@ public class Goods {
 
     @Column(nullable = false)
     private int delivery_time;
+
+    @OneToMany(mappedBy = "goods")
+    private List<Orders> orders = new ArrayList<>();
 
     @Builder
     public Goods(String name, int price, String image, int main_category, int sub_category, int delivery_time){
