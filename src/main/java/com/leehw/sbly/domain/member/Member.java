@@ -29,10 +29,10 @@ public class Member{
     @Column
     private int money;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "orders_member")
     private List<Orders> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "cart_member")
     private List<Cart> carts = new ArrayList<>();
 
     @Builder

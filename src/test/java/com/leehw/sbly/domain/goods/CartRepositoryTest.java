@@ -59,12 +59,12 @@ public class CartRepositoryTest {
                 .delivery_time(delivery_time).build();
         goodsRepository.save(goods);
 
-        cartRepository.save(Cart.builder().member(member).goods(goods).build());
+        cartRepository.save(Cart.builder().cart_member(member).cart_goods(goods).build());
 
         List<Cart> cartsList = cartRepository.findAll();
         Cart cart = cartsList.get(0);
 
-        assertThat(cart.getMember()).isEqualTo(member);
-        assertThat(cart.getGoods()).isEqualTo(goods);
+        assertThat(cart.getCart_member()).isEqualTo(member);
+        assertThat(cart.getCart_goods()).isEqualTo(goods);
     }
 }

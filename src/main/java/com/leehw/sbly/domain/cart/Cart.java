@@ -20,15 +20,15 @@ public class Cart {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member;
+    private Member cart_member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "goods_id")
-    private Goods goods;
+    private Goods cart_goods;
 
     @Builder
-    public Cart(Member member, Goods goods){
-        this.member = member;
-        this.goods = goods;
+    public Cart(Member cart_member, Goods cart_goods){
+        this.cart_member = cart_member;
+        this.cart_goods = cart_goods;
     }
 }

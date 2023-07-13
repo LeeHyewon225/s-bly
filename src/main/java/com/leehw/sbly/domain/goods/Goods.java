@@ -38,10 +38,10 @@ public class Goods {
     @Column(nullable = false)
     private int delivery_time;
 
-    @OneToMany(mappedBy = "goods")
+    @OneToMany(mappedBy = "orders_goods")
     private List<Orders> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "goods")
+    @OneToMany(mappedBy = "cart_goods")
     private List<Cart> carts = new ArrayList<>();
 
     @Builder

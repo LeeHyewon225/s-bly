@@ -21,19 +21,19 @@ public class Orders extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member;
+    private Member orders_member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "goods_id")
-    private Goods goods;
+    private Goods orders_goods;
 
     @Column
     private int deliver;
 
     @Builder
-    public Orders(Member member, Goods goods, int deliver){
-        this.member = member;
-        this.goods = goods;
+    public Orders(Member orders_member, Goods orders_goods, int deliver){
+        this.orders_member = orders_member;
+        this.orders_goods = orders_goods;
         this.deliver = deliver;
     }
 

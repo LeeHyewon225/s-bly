@@ -60,13 +60,13 @@ public class OrdersRepositoryTest {
         goodsRepository.save(goods);
 
         int deliver= 0;
-        ordersRepository.save(Orders.builder().member(member).goods(goods).deliver(deliver).build());
+        ordersRepository.save(Orders.builder().orders_member(member).orders_goods(goods).deliver(deliver).build());
 
         List<Orders> ordersList = ordersRepository.findAll();
         Orders orders = ordersList.get(0);
 
-        assertThat(orders.getMember()).isEqualTo(member);
-        assertThat(orders.getGoods()).isEqualTo(goods);
+        assertThat(orders.getOrders_member()).isEqualTo(member);
+        assertThat(orders.getOrders_goods()).isEqualTo(goods);
         assertThat(orders.getDeliver()).isEqualTo(deliver);
     }
 }
