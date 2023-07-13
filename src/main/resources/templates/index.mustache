@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+</head>
+<body>
+<h1>S-bly</h1>
+{{#memberName}}
+    Logged in as: {{memberName}}
+    <a href="/logout" role="button">Logout</a>
+{{/memberName}}
+{{^memberName}}
+    <a href="/oauth2/author/authorization/google" role="button">Google Login</a>
+{{/memberName}}
+</body>
+</html>
