@@ -30,13 +30,13 @@ public class Goods {
     private String image;
 
     @Column(nullable = false, name = "main_category")
-    private int maincategory;
+    private int mainCategory;
 
     @Column(nullable = false, name = "sub_category")
-    private int subcategory;
+    private int subCategory;
 
     @Column(nullable = false)
-    private int deliverytime;
+    private int deliveryTime;
 
     @OneToMany(mappedBy = "goods")
     private List<Orders> orders = new ArrayList<>();
@@ -45,12 +45,12 @@ public class Goods {
     private List<Cart> carts = new ArrayList<>();
 
     @Builder
-    public Goods(String name, int price, String image, int maincategory, int subcategory, int deliverytime){
+    public Goods(String name, int price, String image, int mainCategory, int subCategory, int deliveryTime){
         this.name = name;
         this.price = price;
         this.image = image;
-        this.maincategory = maincategory;
-        this.subcategory = subcategory;
-        this.deliverytime = deliverytime;
+        this.mainCategory = mainCategory;
+        this.subCategory = subCategory;
+        this.deliveryTime = deliveryTime;
     }
 }

@@ -1,7 +1,9 @@
-package com.leehw.sbly.domain.goods;
+package com.leehw.sbly.domain.cart;
 
 import com.leehw.sbly.domain.cart.Cart;
 import com.leehw.sbly.domain.cart.CartRepository;
+import com.leehw.sbly.domain.goods.Goods;
+import com.leehw.sbly.domain.goods.GoodsRepository;
 import com.leehw.sbly.domain.member.Member;
 import com.leehw.sbly.domain.member.MemberRepository;
 import org.junit.After;
@@ -48,15 +50,15 @@ public class CartRepositoryTest {
 
         String goods_name = "맨투맨";
         int goods_price = 10000;
-        int maincategory = 1;
-        int subcategory = 1;
-        int deliverytime = 3;
+        int mainCategory = 1;
+        int subCategory = 1;
+        int deliveryTime = 3;
         Goods goods = Goods.builder()
                 .name(goods_name)
                 .price(goods_price)
-                .maincategory(maincategory)
-                .subcategory(subcategory)
-                .deliverytime(deliverytime).build();
+                .mainCategory(mainCategory)
+                .subCategory(subCategory)
+                .deliveryTime(deliveryTime).build();
         goodsRepository.save(goods);
 
         cartRepository.save(Cart.builder().member(member).goods(goods).build());
