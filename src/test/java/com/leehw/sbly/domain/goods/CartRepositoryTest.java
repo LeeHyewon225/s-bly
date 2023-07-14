@@ -39,7 +39,7 @@ public class CartRepositoryTest {
     @Test
     @Transactional
     public void 장바구니저장_불러오기(){
-        String member_email = " rachel6319@naver.com";
+        String member_email = "rachel6319@naver.com";
         String member_name = "이혜원";
         Member member = Member.builder()
                 .email(member_email)
@@ -48,23 +48,23 @@ public class CartRepositoryTest {
 
         String goods_name = "맨투맨";
         int goods_price = 10000;
-        int main_category = 1;
-        int sub_category = 1;
-        int delivery_time = 3;
+        int maincategory = 1;
+        int subcategory = 1;
+        int deliverytime = 3;
         Goods goods = Goods.builder()
                 .name(goods_name)
                 .price(goods_price)
-                .main_category(main_category)
-                .sub_category(sub_category)
-                .delivery_time(delivery_time).build();
+                .maincategory(maincategory)
+                .subcategory(subcategory)
+                .deliverytime(deliverytime).build();
         goodsRepository.save(goods);
 
-        cartRepository.save(Cart.builder().cart_member(member).cart_goods(goods).build());
+        cartRepository.save(Cart.builder().member(member).goods(goods).build());
 
         List<Cart> cartsList = cartRepository.findAll();
         Cart cart = cartsList.get(0);
 
-        assertThat(cart.getCart_member()).isEqualTo(member);
-        assertThat(cart.getCart_goods()).isEqualTo(goods);
+        assertThat(cart.getMember()).isEqualTo(member);
+        assertThat(cart.getGoods()).isEqualTo(goods);
     }
 }

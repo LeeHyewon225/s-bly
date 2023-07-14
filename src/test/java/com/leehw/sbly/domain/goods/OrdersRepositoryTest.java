@@ -39,7 +39,7 @@ public class OrdersRepositoryTest {
     @Test
     @Transactional
     public void 주문저장_불러오기(){
-        String member_email = " rachel6319@naver.com";
+        String member_email = "rachel6319@naver.com";
         String member_name = "이혜원";
         Member member = Member.builder()
                 .email(member_email)
@@ -48,25 +48,25 @@ public class OrdersRepositoryTest {
 
         String goods_name = "맨투맨";
         int goods_price = 10000;
-        int main_category = 1;
-        int sub_category = 1;
-        int delivery_time = 3;
+        int maincategory = 1;
+        int subcategory = 1;
+        int deliverytime = 3;
         Goods goods = Goods.builder()
                 .name(goods_name)
                 .price(goods_price)
-                .main_category(main_category)
-                .sub_category(sub_category)
-                .delivery_time(delivery_time).build();
+                .maincategory(maincategory)
+                .subcategory(subcategory)
+                .deliverytime(deliverytime).build();
         goodsRepository.save(goods);
 
         int deliver= 0;
-        ordersRepository.save(Orders.builder().orders_member(member).orders_goods(goods).deliver(deliver).build());
+        ordersRepository.save(Orders.builder().member(member).goods(goods).deliver(deliver).build());
 
         List<Orders> ordersList = ordersRepository.findAll();
         Orders orders = ordersList.get(0);
 
-        assertThat(orders.getOrders_member()).isEqualTo(member);
-        assertThat(orders.getOrders_goods()).isEqualTo(goods);
+        assertThat(orders.getMember()).isEqualTo(member);
+        assertThat(orders.getGoods()).isEqualTo(goods);
         assertThat(orders.getDeliver()).isEqualTo(deliver);
     }
 }

@@ -29,28 +29,28 @@ public class Goods {
     @Column
     private String image;
 
-    @Column(nullable = false)
-    private int main_category;
+    @Column(nullable = false, name = "main_category")
+    private int maincategory;
+
+    @Column(nullable = false, name = "sub_category")
+    private int subcategory;
 
     @Column(nullable = false)
-    private int sub_category;
+    private int deliverytime;
 
-    @Column(nullable = false)
-    private int delivery_time;
-
-    @OneToMany(mappedBy = "orders_goods")
+    @OneToMany(mappedBy = "goods")
     private List<Orders> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "cart_goods")
+    @OneToMany(mappedBy = "goods")
     private List<Cart> carts = new ArrayList<>();
 
     @Builder
-    public Goods(String name, int price, String image, int main_category, int sub_category, int delivery_time){
+    public Goods(String name, int price, String image, int maincategory, int subcategory, int deliverytime){
         this.name = name;
         this.price = price;
         this.image = image;
-        this.main_category = main_category;
-        this.sub_category = sub_category;
-        this.delivery_time = delivery_time;
+        this.maincategory = maincategory;
+        this.subcategory = subcategory;
+        this.deliverytime = deliverytime;
     }
 }

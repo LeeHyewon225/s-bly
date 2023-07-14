@@ -27,16 +27,16 @@ public class GoodsRepositoryTest {
     public void 상품저장_불러오기(){
         String name = "테스트 상품";
         int price = 10000;
-        int main_category = 1;
-        int sub_category = 1;
-        int delivery_time = 3;
+        int maincategory = 1;
+        int subcategory = 1;
+        int deliverytime = 3;
 
         goodsRepository.save(Goods.builder()
                 .name(name)
                 .price(price)
-                .main_category(main_category)
-                .sub_category(sub_category)
-                .delivery_time(delivery_time)
+                .maincategory(maincategory)
+                .subcategory(subcategory)
+                .deliverytime(deliverytime)
                 .build());
 
         List<Goods> goodsList = goodsRepository.findAll();
@@ -44,8 +44,8 @@ public class GoodsRepositoryTest {
         Goods goods = goodsList.get(0);
         assertThat(goods.getName()).isEqualTo(name);
         assertThat(goods.getPrice()).isEqualTo(price);
-        assertThat(goods.getMain_category()).isEqualTo(main_category);
-        assertThat(goods.getSub_category()).isEqualTo(sub_category);
-        assertThat(goods.getDelivery_time()).isEqualTo(delivery_time);
+        assertThat(goods.getMaincategory()).isEqualTo(maincategory);
+        assertThat(goods.getSubcategory()).isEqualTo(subcategory);
+        assertThat(goods.getDeliverytime()).isEqualTo(deliverytime);
     }
 }
