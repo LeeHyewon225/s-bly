@@ -15,21 +15,21 @@ public class GoodsService {
 
     private final GoodsRepository goodsRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<GoodsListResponseDto> findByRAND(){
         return goodsRepository.findAllRAND().stream()
                 .map(GoodsListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<GoodsListResponseDto> findByMainCategory(int mainCategory){
         return goodsRepository.findByMainCategory(mainCategory).stream()
                 .map(GoodsListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<GoodsListResponseDto> findByMainCategoryAndSubCategory(int mainCategory, int subCategory){
         return goodsRepository.findByMainCategoryAndSubCategory(mainCategory, subCategory).stream()
                 .map(GoodsListResponseDto::new)

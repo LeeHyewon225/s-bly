@@ -6,6 +6,7 @@ import com.leehw.sbly.domain.member.Member;
 import com.leehw.sbly.domain.member.MemberRepository;
 import com.leehw.sbly.domain.order.Orders;
 import com.leehw.sbly.domain.order.OrdersRepository;
+import com.leehw.sbly.web.Dto.orders.OrderResponseDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,6 +33,9 @@ public class OrdersServiceTest {
     @Autowired
     private GoodsRepository goodsRepository;
 
+    @Autowired
+    private OrdersService ordersService;
+
     @After
     public void cleanup(){
         ordersRepository.deleteAll();
@@ -40,7 +45,7 @@ public class OrdersServiceTest {
 
     @Test
     @Transactional
-    public void Orders_회원아이디로_조회하다(){
+    public void Orders_회원아이디로_조회하다_and_배송_여부_계산하가(){
         String member_email = "rachel6319@naver.com";
         String member_name = "이혜원";
         Member member = Member.builder()
@@ -63,10 +68,18 @@ public class OrdersServiceTest {
 
         int deliver= 0;
         int cancelOrder = 0;
-        ordersRepository.save(Orders.builder().member(member).goods(goods).deliver(deliver).cancelOrder(cancelOrder).build());
+        Orders orders = Orders.builder()
+                .member(member)
+                .goods(goods)
+                .deliver(deliver)
+                .cancelOrder(cancelOrder)
+                .build();
+        ordersRepository.save(orders);
+        orders.setCreatedDate(2023, 7,11);
 
-        List<Orders> ordersList = ordersRepository.findByMember(member);
+        OrderResponseDto responseDto = ordersService.findByMemberId(member.getId()).get(0);
 
-        assertThat(ordersList.get(0).getMember()).isEqualTo(member);
+        assertThat(responseDto.getMember()).isEqualTo(member);
+        assertThat(responseDto.getDeliver()).isEqualTo(1);
     }
 }

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
@@ -43,5 +44,10 @@ public class Orders extends BaseTimeEntity {
 
     public void cancel(){
         this.cancelOrder = 1;
+    }
+
+    public void calculateDelivery(){
+        if(this.getCreatedDate().plusDays(goods.getDeliveryTime()).isBefore(LocalDateTime.now()))
+            deliver = 1;
     }
 }

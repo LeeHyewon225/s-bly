@@ -19,4 +19,8 @@ public class BaseTimeEntity {
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
+    public void setCreatedDate(int year, int month, int day){ // 테스트를 위한 메소드
+        createdDate = LocalDateTime.of(year, month, day, 0, 0, 0);
+    }
 }
