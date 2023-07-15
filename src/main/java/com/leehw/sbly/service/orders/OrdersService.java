@@ -37,4 +37,12 @@ public class OrdersService {
                 .cancelOrder(0)
                 .build()).getId();
     }
+
+    @Transactional
+    public Long cancel(Long id){
+        Orders orders = ordersRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("해당 주문이 없습니다. id = " + id));
+        orders.cancel();
+        return id;
+    }
 }

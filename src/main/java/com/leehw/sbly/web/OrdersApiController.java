@@ -15,4 +15,9 @@ public class OrdersApiController {
     public Long save(@RequestBody OrdersSaveRequestDto ordersSaveRequestDto){
         return ordersService.save(ordersSaveRequestDto);
     }
+
+    @PutMapping("/api/orders/{id}")
+    public Long cancel(@PathVariable Long id){
+        return ordersService.cancel(id);
+    }
 }

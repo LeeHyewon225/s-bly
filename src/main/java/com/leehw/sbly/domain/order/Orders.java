@@ -41,4 +41,7 @@ public class Orders extends BaseTimeEntity {
         this.cancelOrder = cancelOrder;
     }
 
+    public void cancel(){
+        this.cancelOrder = 1;
+    }
 }
