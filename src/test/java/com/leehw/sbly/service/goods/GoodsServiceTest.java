@@ -2,6 +2,7 @@ package com.leehw.sbly.service.goods;
 
 import com.leehw.sbly.domain.goods.Goods;
 import com.leehw.sbly.domain.goods.GoodsRepository;
+import com.leehw.sbly.web.Dto.goods.GoodsListResponseDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,9 @@ public class GoodsServiceTest {
 
     @Autowired
     private GoodsRepository goodsRepository;
+
+    @Autowired
+    private GoodsService goodsService;
 
     @After
     public void cleanup(){
@@ -41,14 +45,11 @@ public class GoodsServiceTest {
                 .deliveryTime(deliveryTime)
                 .build());
 
-        List<Goods> goodsList = goodsRepository.findAllRAND();
+        List<GoodsListResponseDto> goodsList = goodsService.findByRAND();
 
-        Goods goods = goodsList.get(0);
+        GoodsListResponseDto goods = goodsList.get(0);
         assertThat(goods.getName()).isEqualTo(name);
         assertThat(goods.getPrice()).isEqualTo(price);
-        assertThat(goods.getMainCategory()).isEqualTo(mainCategory);
-        assertThat(goods.getSubCategory()).isEqualTo(subCategory);
-        assertThat(goods.getDeliveryTime()).isEqualTo(deliveryTime);
     }
 
     @Test
@@ -67,14 +68,11 @@ public class GoodsServiceTest {
                 .deliveryTime(deliveryTime)
                 .build());
 
-        List<Goods> goodsList = goodsRepository.findByMainCategory(mainCategory);
+        List<GoodsListResponseDto> goodsList = goodsService.findByMainCategory(mainCategory);
 
-        Goods goods = goodsList.get(0);
+        GoodsListResponseDto goods = goodsList.get(0);
         assertThat(goods.getName()).isEqualTo(name);
         assertThat(goods.getPrice()).isEqualTo(price);
-        assertThat(goods.getMainCategory()).isEqualTo(mainCategory);
-        assertThat(goods.getSubCategory()).isEqualTo(subCategory);
-        assertThat(goods.getDeliveryTime()).isEqualTo(deliveryTime);
     }
 
     @Test
@@ -93,13 +91,10 @@ public class GoodsServiceTest {
                 .deliveryTime(deliveryTime)
                 .build());
 
-        List<Goods> goodsList = goodsRepository.findByMainCategoryAndSubCategory(mainCategory, subCategory);
+        List<GoodsListResponseDto> goodsList = goodsService.findByMainCategoryAndSubCategory(mainCategory, subCategory);
 
-        Goods goods = goodsList.get(0);
+        GoodsListResponseDto goods = goodsList.get(0);
         assertThat(goods.getName()).isEqualTo(name);
         assertThat(goods.getPrice()).isEqualTo(price);
-        assertThat(goods.getMainCategory()).isEqualTo(mainCategory);
-        assertThat(goods.getSubCategory()).isEqualTo(subCategory);
-        assertThat(goods.getDeliveryTime()).isEqualTo(deliveryTime);
     }
 }
