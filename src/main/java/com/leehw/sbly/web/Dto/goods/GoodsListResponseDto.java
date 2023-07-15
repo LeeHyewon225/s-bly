@@ -1,4 +1,4 @@
-package com.leehw.sbly.web.Dto;
+package com.leehw.sbly.web.Dto.goods;
 
 import com.leehw.sbly.domain.goods.Goods;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.leehw.sbly.service.goods;
 
 import com.leehw.sbly.domain.goods.GoodsRepository;
-import com.leehw.sbly.web.Dto.GoodsListResponseDto;
+import com.leehw.sbly.web.Dto.goods.GoodsListResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
