@@ -2,6 +2,7 @@ package com.leehw.sbly.service.goods;
 
 import com.leehw.sbly.domain.goods.Goods;
 import com.leehw.sbly.domain.goods.GoodsRepository;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class GoodsServiceTest {
 
     @Autowired
     private GoodsRepository goodsRepository;
+
+    @After
+    public void cleanup(){
+        goodsRepository.deleteAll();
+    }
 
     @Test
     public void Goods_조회하다(){

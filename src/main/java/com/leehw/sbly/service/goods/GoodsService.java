@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Service
 public class GoodsService {
 
-    private GoodsRepository goodsRepository;
+    private final GoodsRepository goodsRepository;
 
     @Transactional
     public List<GoodsListResponseDto> findByRAND(){

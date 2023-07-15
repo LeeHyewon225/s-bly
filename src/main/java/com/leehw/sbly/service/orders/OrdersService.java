@@ -8,9 +8,12 @@ import com.leehw.sbly.domain.order.Orders;
 import com.leehw.sbly.domain.order.OrdersRepository;
 import com.leehw.sbly.web.Dto.orders.OrdersSaveRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -44,5 +47,12 @@ public class OrdersService {
                 .orElseThrow(()->new IllegalArgumentException("해당 주문이 없습니다. id = " + id));
         orders.cancel();
         return id;
+    }
+
+    @Transactional
+    public List<Orders> findByMemberId(Long id){
+        Member member = memberRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. + id = " + id));
+        return ordersRepository.findByMember(member);
     }
 }
