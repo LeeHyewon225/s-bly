@@ -62,7 +62,8 @@ public class OrdersRepositoryTest {
         goodsRepository.save(goods);
 
         int deliver= 0;
-        ordersRepository.save(Orders.builder().member(member).goods(goods).deliver(deliver).build());
+        int cancelOrder = 0;
+        ordersRepository.save(Orders.builder().member(member).goods(goods).deliver(deliver).cancelOrder(cancelOrder).build());
 
         List<Orders> ordersList = ordersRepository.findAll();
         Orders orders = ordersList.get(0);
@@ -70,5 +71,6 @@ public class OrdersRepositoryTest {
         assertThat(orders.getMember()).isEqualTo(member);
         assertThat(orders.getGoods()).isEqualTo(goods);
         assertThat(orders.getDeliver()).isEqualTo(deliver);
+        assertThat(orders.getCancelOrder()).isEqualTo(cancelOrder);
     }
 }

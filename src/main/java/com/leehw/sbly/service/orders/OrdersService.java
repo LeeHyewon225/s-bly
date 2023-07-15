@@ -34,6 +34,7 @@ public class OrdersService {
                 .member(member)
                 .goods(goods)
                 .deliver(0)
+                .cancelOrder(0)
                 .build()).getId();
     }
 }

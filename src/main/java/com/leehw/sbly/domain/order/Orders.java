@@ -30,11 +30,15 @@ public class Orders extends BaseTimeEntity {
     @Column
     private int deliver;
 
+    @Column
+    private int cancelOrder;
+
     @Builder
-    public Orders(Member member, Goods goods, int deliver){
+    public Orders(Member member, Goods goods, int deliver, int cancelOrder){
         this.member = member;
         this.goods = goods;
         this.deliver = deliver;
+        this.cancelOrder = cancelOrder;
     }
 
 }
