@@ -35,7 +35,7 @@ public class OrdersService {
         Goods goods = goodsRepository.findById(goods_id)
                 .orElseThrow(()->new IllegalArgumentException("해당 상품이 없습니다. id = " + goods_id));
         if(member.getMoney() < goods.getPrice())
-            return (long) -1;
+            return -1L;
         member.pricecalculate(goods.getPrice());
         return ordersRepository.save(Orders.builder()
                 .member(member)

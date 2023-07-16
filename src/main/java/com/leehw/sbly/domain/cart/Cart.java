@@ -2,6 +2,7 @@ package com.leehw.sbly.domain.cart;
 
 import com.leehw.sbly.domain.goods.Goods;
 import com.leehw.sbly.domain.member.Member;
+import com.leehw.sbly.domain.order.Orders;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,5 +31,14 @@ public class Cart {
     public Cart(Member member, Goods goods){
         this.member = member;
         this.goods = goods;
+    }
+
+    public Orders toOrders(){
+        return Orders.builder()
+                .member(member)
+                .goods(goods)
+                .deliver(0)
+                .cancelOrder(0)
+                .build();
     }
 }

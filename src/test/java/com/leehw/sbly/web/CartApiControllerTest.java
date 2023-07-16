@@ -7,6 +7,8 @@ import com.leehw.sbly.domain.goods.Goods;
 import com.leehw.sbly.domain.goods.GoodsRepository;
 import com.leehw.sbly.domain.member.Member;
 import com.leehw.sbly.domain.member.MemberRepository;
+import com.leehw.sbly.domain.order.Orders;
+import com.leehw.sbly.domain.order.OrdersRepository;
 import com.leehw.sbly.web.Dto.cart.CartSaveRequestDto;
 import org.junit.After;
 import org.junit.Before;
@@ -51,6 +53,9 @@ public class CartApiControllerTest {
 
     @Autowired
     private GoodsRepository goodsRepository;
+
+    @Autowired
+    private OrdersRepository ordersRepository;
 
     @Autowired
     private WebApplicationContext context;
@@ -157,7 +162,7 @@ public class CartApiControllerTest {
         Cart cart = Cart.builder().member(member).goods(goods).build();
         cartRepository.save(cart);
 
-        String url = "http://localhost:" + port + "/api/cart/delete";
+        String url = "http://localhost:" + port + "/api/cart";
 
         mvc.perform(delete(url)
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -166,5 +171,134 @@ public class CartApiControllerTest {
 
         List<Cart> cartList = cartRepository.findAll();
         assertThat(cartList.get(0)).isEqualTo(cart);
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    @Transactional
+    public void Cart_주문하다() throws Exception{
+        String member_email = "rachel6319@naver.com";
+        String member_name = "이혜원";
+        Member member = Member.builder()
+                .email(member_email)
+                .name(member_name)
+                .money(40000).build();
+        memberRepository.save(member);
+        Long member_id = member.getId();
+
+        List<Long> orderCart = new ArrayList<>();
+
+        Goods goods1 = Goods.builder()
+                .name("맨투맨 1")
+                .price(10000)
+                .mainCategory(1)
+                .subCategory(1)
+                .deliveryTime(3).build();
+        goodsRepository.save(goods1);
+        Cart cart1 = Cart.builder().member(member).goods(goods1).build();
+        cartRepository.save(cart1);
+        orderCart.add(cart1.getId());
+
+        Goods goods2 = Goods.builder()
+                .name("맨투맨 2")
+                .price(15000)
+                .mainCategory(1)
+                .subCategory(1)
+                .deliveryTime(3).build();
+        goodsRepository.save(goods2);
+        Cart cart2 = Cart.builder().member(member).goods(goods2).build();
+        cartRepository.save(cart2);
+
+        Goods goods3 = Goods.builder()
+                .name("맨투맨 3")
+                .price(20000)
+                .mainCategory(1)
+                .subCategory(1)
+                .deliveryTime(3).build();
+        goodsRepository.save(goods3);
+        Cart cart3 = Cart.builder().member(member).goods(goods3).build();
+        cartRepository.save(cart3);
+        orderCart.add(cart3.getId());
+
+        String url = "http://localhost:" + port + "/api/cart/" + member_id;
+
+        mvc.perform(delete(url)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(new ObjectMapper().writeValueAsString(orderCart)))
+                .andExpect(status().isOk());
+
+        List<Orders> ordersList = ordersRepository.findAll();
+        assertThat(ordersList.get(0).getGoods()).isEqualTo(goods1);
+        assertThat(ordersList.get(1).getGoods()).isEqualTo(goods3);
+
+        List<Cart> cartList = cartRepository.findAll();
+        assertThat(cartList.get(0)).isEqualTo(cart2);
+
+        assertThat(member.getMoney()).isEqualTo(10000);
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    @Transactional
+    public void Cart_주문_실패하다() throws Exception{
+        String member_email = "rachel6319@naver.com";
+        String member_name = "이혜원";
+        Member member = Member.builder()
+                .email(member_email)
+                .name(member_name)
+                .money(20000).build();
+        memberRepository.save(member);
+        Long member_id = member.getId();
+
+        List<Long> orderCart = new ArrayList<>();
+
+        Goods goods1 = Goods.builder()
+                .name("맨투맨 1")
+                .price(10000)
+                .mainCategory(1)
+                .subCategory(1)
+                .deliveryTime(3).build();
+        goodsRepository.save(goods1);
+        Cart cart1 = Cart.builder().member(member).goods(goods1).build();
+        cartRepository.save(cart1);
+        orderCart.add(cart1.getId());
+
+        Goods goods2 = Goods.builder()
+                .name("맨투맨 2")
+                .price(15000)
+                .mainCategory(1)
+                .subCategory(1)
+                .deliveryTime(3).build();
+        goodsRepository.save(goods2);
+        Cart cart2 = Cart.builder().member(member).goods(goods2).build();
+        cartRepository.save(cart2);
+
+        Goods goods3 = Goods.builder()
+                .name("맨투맨 3")
+                .price(20000)
+                .mainCategory(1)
+                .subCategory(1)
+                .deliveryTime(3).build();
+        goodsRepository.save(goods3);
+        Cart cart3 = Cart.builder().member(member).goods(goods3).build();
+        cartRepository.save(cart3);
+        orderCart.add(cart3.getId());
+
+        String url = "http://localhost:" + port + "/api/cart/" + member_id;
+
+        mvc.perform(delete(url)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(new ObjectMapper().writeValueAsString(orderCart)))
+                .andExpect(status().isOk());
+
+        List<Orders> ordersList = ordersRepository.findAll();
+        assertThat(ordersList.size()).isEqualTo(0);
+
+        List<Cart> cartList = cartRepository.findAll();
+        assertThat(cartList.get(0)).isEqualTo(cart1);
+        assertThat(cartList.get(1)).isEqualTo(cart2);
+        assertThat(cartList.get(2)).isEqualTo(cart3);
+
+        assertThat(member.getMoney()).isEqualTo(20000);
     }
 }
