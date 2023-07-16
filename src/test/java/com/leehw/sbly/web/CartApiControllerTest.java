@@ -24,10 +24,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -108,5 +110,61 @@ public class CartApiControllerTest {
         List<Cart> cartList = cartRepository.findAll();
         assertThat(cartList.get(0).getMember()).isEqualTo(member);
         assertThat(cartList.get(0).getGoods()).isEqualTo(goods);
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    @Transactional
+    public void Cart_삭제하다() throws Exception{
+        String member_email = "rachel6319@naver.com";
+        String member_name = "이혜원";
+        Member member = Member.builder()
+                .email(member_email)
+                .name(member_name).build();
+        memberRepository.save(member);
+
+        List<Long> deleteCart = new ArrayList<>();
+        for(int i=1;i<=3;i++) {
+            String goods_name = "맨투맨" + i;
+            int goods_price = 10000 * i;
+            int mainCategory = 1;
+            int subCategory = 1;
+            int deliveryTime = 3;
+            Goods goods = Goods.builder()
+                    .name(goods_name)
+                    .price(goods_price)
+                    .mainCategory(mainCategory)
+                    .subCategory(subCategory)
+                    .deliveryTime(deliveryTime).build();
+            goodsRepository.save(goods);
+            Cart cart = Cart.builder().member(member).goods(goods).build();
+            cartRepository.save(cart);
+            deleteCart.add(cart.getId());
+        }
+
+        String goods_name = "맨투맨4";
+        int goods_price = 10000 * 4;
+        int mainCategory = 1;
+        int subCategory = 1;
+        int deliveryTime = 3;
+        Goods goods = Goods.builder()
+                .name(goods_name)
+                .price(goods_price)
+                .mainCategory(mainCategory)
+                .subCategory(subCategory)
+                .deliveryTime(deliveryTime).build();
+        goodsRepository.save(goods);
+        Cart cart = Cart.builder().member(member).goods(goods).build();
+        cartRepository.save(cart);
+
+        String url = "http://localhost:" + port + "/api/cart/delete";
+
+        mvc.perform(delete(url)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(new ObjectMapper().writeValueAsString(deleteCart)))
+                .andExpect(status().isOk());
+
+        List<Cart> cartList = cartRepository.findAll();
+        assertThat(cartList.get(0)).isEqualTo(cart);
     }
 }

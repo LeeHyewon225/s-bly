@@ -6,10 +6,13 @@ import com.leehw.sbly.domain.goods.Goods;
 import com.leehw.sbly.domain.goods.GoodsRepository;
 import com.leehw.sbly.domain.member.Member;
 import com.leehw.sbly.domain.member.MemberRepository;
+import com.leehw.sbly.web.CartApiController;
 import com.leehw.sbly.web.Dto.cart.CartSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -28,5 +31,15 @@ public class CartService {
                 .member(member)
                 .goods(goods)
                 .build()).getId();
+    }
+
+    @Transactional
+    public Long delete(List<Long> deleteCart){
+        for(Long i:deleteCart){
+            Cart cart = cartRepository.findById(i)
+                    .orElseThrow(()->new IllegalArgumentException("해당 장바구니 상품이 없습니다. id +" + i));
+            cartRepository.delete(cart);
+        }
+        return 1L;
     }
 }
