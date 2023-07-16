@@ -34,7 +34,9 @@ public class OrdersService {
                 .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id = " + member_id));
         Goods goods = goodsRepository.findById(goods_id)
                 .orElseThrow(()->new IllegalArgumentException("해당 상품이 없습니다. id = " + goods_id));
-
+        if(member.getMoney() < goods.getPrice())
+            return (long) -1;
+        member.pricecalculate(goods.getPrice());
         return ordersRepository.save(Orders.builder()
                 .member(member)
                 .goods(goods)

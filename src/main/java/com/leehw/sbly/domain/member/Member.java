@@ -47,4 +47,8 @@ public class Member{
 
         return this;
     }
+
+    public void pricecalculate(int price){
+        money -= price;
+    }
 }

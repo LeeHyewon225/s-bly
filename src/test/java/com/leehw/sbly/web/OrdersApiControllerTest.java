@@ -78,9 +78,11 @@ public class OrdersApiControllerTest {
     public void Orders_등록된다() throws Exception{
         String member_email = "rachel6319@naver.com";
         String member_name = "이혜원";
+        int money = 20000;
         Member member = Member.builder()
                 .email(member_email)
-                .name(member_name).build();
+                .name(member_name)
+                .money(money).build();
         memberRepository.save(member);
         Long member_id = member.getId();
 
@@ -113,6 +115,54 @@ public class OrdersApiControllerTest {
         List<Orders> all = ordersRepository.findAll();
         assertThat(all.get(0).getMember()).isEqualTo(member);
         assertThat(all.get(0).getGoods()).isEqualTo(goods);
+
+        assertThat(all.get(0).getMember().getMoney()).isEqualTo(10000);
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    @Transactional
+    public void Orders_등록_실패한다() throws Exception{
+        String member_email = "rachel6319@naver.com";
+        String member_name = "이혜원";
+        int money = 5000;
+        Member member = Member.builder()
+                .email(member_email)
+                .name(member_name)
+                .money(money).build();
+        memberRepository.save(member);
+        Long member_id = member.getId();
+
+        String goods_name = "맨투맨";
+        int goods_price = 10000;
+        int mainCategory = 1;
+        int subCategory = 1;
+        int deliveryTime = 3;
+        Goods goods = Goods.builder()
+                .name(goods_name)
+                .price(goods_price)
+                .mainCategory(mainCategory)
+                .subCategory(subCategory)
+                .deliveryTime(deliveryTime).build();
+        goodsRepository.save(goods);
+        Long goods_id = goods.getId();
+
+        OrdersSaveRequestDto ordersSaveRequestDto = OrdersSaveRequestDto.builder()
+                .member_id(member_id)
+                .goods_id(goods_id)
+                .build();
+
+        String url = "http://localhost:" + port + "/api/orders";
+
+        mvc.perform(post(url)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(new ObjectMapper().writeValueAsString(ordersSaveRequestDto)))
+                .andExpect(status().isOk());
+
+        List<Orders> all = ordersRepository.findAll();
+        assertThat(all.size()).isEqualTo(0);
+
+        assertThat(member.getMoney()).isEqualTo(5000);
     }
 
     @Test
