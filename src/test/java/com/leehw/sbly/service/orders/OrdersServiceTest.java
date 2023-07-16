@@ -45,7 +45,7 @@ public class OrdersServiceTest {
 
     @Test
     @Transactional
-    public void Orders_회원아이디로_조회하다_and_배송_여부_계산하가(){
+    public void Orders_회원아이디로_조회하다_and_배송_여부_계산하다(){
         String member_email = "rachel6319@naver.com";
         String member_name = "이혜원";
         Member member = Member.builder()
