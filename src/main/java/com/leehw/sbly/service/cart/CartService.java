@@ -8,12 +8,14 @@ import com.leehw.sbly.domain.member.Member;
 import com.leehw.sbly.domain.member.MemberRepository;
 import com.leehw.sbly.domain.order.OrdersRepository;
 import com.leehw.sbly.web.CartApiController;
+import com.leehw.sbly.web.Dto.cart.CartResponseDto;
 import com.leehw.sbly.web.Dto.cart.CartSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -65,5 +67,14 @@ public class CartService {
             ordersRepository.save(cart.toOrders());
         }
         return 1L;
+    }
+
+    @Transactional
+    public List<CartResponseDto> findByMemberId(Long id){
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id = " + id));
+        return cartRepository.findByMember(member).stream()
+                .map(CartResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
