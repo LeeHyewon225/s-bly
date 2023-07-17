@@ -1,7 +1,9 @@
 package com.leehw.sbly.service.goods;
 
+import com.leehw.sbly.domain.goods.Goods;
 import com.leehw.sbly.domain.goods.GoodsRepository;
 import com.leehw.sbly.web.Dto.goods.GoodsListResponseDto;
+import com.leehw.sbly.web.Dto.goods.GoodsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,5 +36,14 @@ public class GoodsService {
         return goodsRepository.findByMainCategoryAndSubCategory(mainCategory, subCategory).stream()
                 .map(GoodsListResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public GoodsResponseDto findById(Long id){
+        Goods goods = goodsRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("해당 상품이 없습니다. id = " + id));
+        System.out.println("name : " + goods.getName());
+        System.out.println("price : " + goods.getPrice());
+        return new GoodsResponseDto(goods);
     }
 }

@@ -41,9 +41,6 @@ public class OrdersApiControllerTest {
     private int port;
 
     @Autowired
-    private TestRestTemplate restTemplate;
-
-    @Autowired
     private OrdersRepository ordersRepository;
 
     @Autowired

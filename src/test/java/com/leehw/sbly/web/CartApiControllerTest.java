@@ -43,9 +43,6 @@ public class CartApiControllerTest {
     private int port;
 
     @Autowired
-    private TestRestTemplate restTemplate;
-
-    @Autowired
     private CartRepository cartRepository;
 
     @Autowired
@@ -73,6 +70,7 @@ public class CartApiControllerTest {
     @After
     public void cleanup(){
         cartRepository.deleteAll();
+        ordersRepository.deleteAll();
         memberRepository.deleteAll();
         goodsRepository.deleteAll();
     }

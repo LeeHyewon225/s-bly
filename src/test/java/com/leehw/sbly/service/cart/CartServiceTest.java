@@ -7,6 +7,7 @@ import com.leehw.sbly.domain.goods.GoodsRepository;
 import com.leehw.sbly.domain.member.Member;
 import com.leehw.sbly.domain.member.MemberRepository;
 import com.leehw.sbly.web.Dto.cart.CartResponseDto;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,13 @@ public class CartServiceTest {
 
     @Autowired
     private CartService cartService;
+
+    @After
+    public void cleanup(){
+        cartRepository.deleteAll();
+        memberRepository.deleteAll();
+        goodsRepository.deleteAll();
+    }
 
     @Test
     @Transactional

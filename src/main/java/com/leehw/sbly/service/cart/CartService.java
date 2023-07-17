@@ -69,7 +69,7 @@ public class CartService {
         return 1L;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CartResponseDto> findByMemberId(Long id){
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id = " + id));
