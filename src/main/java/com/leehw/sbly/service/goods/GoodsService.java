@@ -42,8 +42,6 @@ public class GoodsService {
     public GoodsResponseDto findById(Long id){
         Goods goods = goodsRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("해당 상품이 없습니다. id = " + id));
-        System.out.println("name : " + goods.getName());
-        System.out.println("price : " + goods.getPrice());
         return new GoodsResponseDto(goods);
     }
 }
