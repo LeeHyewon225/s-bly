@@ -1,0 +1,75 @@
+{{>layout/header}}
+<br><br><br><br>
+<div class="container px-4 py-5">
+    <div class="row g-4 py-2 row-cols-1 row-cols-lg-1">
+        <div class="feature col" style="margin: 0px 200px 0px 200px;">
+            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <i class="bi bi-person-fill"></i>
+            </div><br><br>
+            <p><strong>{{email}} &nbsp|&nbsp {{memberName}}</strong></p>
+            <p>보유 머니 &nbsp<strong>{{money}}원</strong></p>
+        </div>
+    </div>
+
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-1">
+        <div class="feature col" style="margin: 0px 200px 0px 200px;">
+            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <i class="bi bi-cart-fill"></i>
+            </div><br><br>
+            <table>
+                <thead>
+                <tr>
+                    <th>주문 번호</th>
+                    <th>이름</th>
+                    <th>가격</th>
+                    <th>배송여부</th>
+                    <th>주문 날짜</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#orders}} <!--posts 라는 List 를 순회(for)-->
+                <tr>
+                    <td>{{id}}</td> <!--List 에서 뽑아낸 객체의 id 필드-->
+                    <td>{{goods.name}}</a></td> <!--List 에서 뽑아낸 객체의 title 필드-->
+                    <td>{{goods.price}}</td> <!--List 에서 뽑아낸 객체의 author 필드-->
+                    <td>{{deliver}}</td> <!--List 에서 뽑아낸 객체의 modifiedDate 필드-->
+                    <td>{{createdDate}}</td>
+                </tr>
+                {{/orders}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row g-4 py-3 row-cols-1 row-cols-lg-1">
+        <div class="feature col" style="margin: 0px 200px 0px 200px;">
+            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <i class="bi bi-cart-check-fill"></i>
+            </div><br><br>
+            <table>
+                <thead>
+                <tr>
+                    <th>주문 번호</th>
+                    <th>이름</th>
+                    <th>가격</th>
+                    <th>배송여부</th>
+                    <th>주문 날짜</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#orders}} <!--posts 라는 List 를 순회(for)-->
+                <tr>
+                    <td>{{id}}</td> <!--List 에서 뽑아낸 객체의 id 필드-->
+                    <td>{{goods.name}}</a></td> <!--List 에서 뽑아낸 객체의 title 필드-->
+                    <td>{{goods.price}}</td> <!--List 에서 뽑아낸 객체의 author 필드-->
+                    <td>{{deliver}}</td> <!--List 에서 뽑아낸 객체의 modifiedDate 필드-->
+                    <td>{{createdDate}}</td>
+                </tr>
+                {{/orders}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+{{>layout/footer}}
