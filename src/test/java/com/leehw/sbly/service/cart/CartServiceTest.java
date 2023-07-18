@@ -73,4 +73,50 @@ public class CartServiceTest {
         assertThat(cartList.get(0).getMember()).isEqualTo(member);
         assertThat(cartList.get(0).getGoods()).isEqualTo(goods);
     }
+
+    @Test
+    @Transactional
+    public void Cart_개수_조회하다(){
+        String member_email = "rachel6319@naver.com";
+        String member_name = "이혜원";
+        Member member = Member.builder()
+                .email(member_email)
+                .name(member_name).build();
+        memberRepository.save(member);
+
+        String goods_name = "맨투맨";
+        int goods_price = 10000;
+        int mainCategory = 1;
+        int subCategory = 1;
+        int deliveryTime = 3;
+        Goods goods = Goods.builder()
+                .name(goods_name)
+                .price(goods_price)
+                .mainCategory(mainCategory)
+                .subCategory(subCategory)
+                .deliveryTime(deliveryTime).build();
+        Goods goods2 = Goods.builder()
+                .name(goods_name)
+                .price(goods_price)
+                .mainCategory(mainCategory)
+                .subCategory(subCategory)
+                .deliveryTime(deliveryTime).build();
+        Goods goods3 = Goods.builder()
+                .name(goods_name)
+                .price(goods_price)
+                .mainCategory(mainCategory)
+                .subCategory(subCategory)
+                .deliveryTime(deliveryTime).build();
+        goodsRepository.save(goods);
+        goodsRepository.save(goods2);
+        goodsRepository.save(goods3);
+
+        cartRepository.save(Cart.builder().member(member).goods(goods).build());
+        cartRepository.save(Cart.builder().member(member).goods(goods2).build());
+        cartRepository.save(Cart.builder().member(member).goods(goods3).build());
+
+        Long count = cartService.cartCount(member.getId());
+
+        assertThat(count).isEqualTo(3);
+    }
 }

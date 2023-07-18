@@ -77,4 +77,11 @@ public class CartService {
                 .map(CartResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public Long cartCount(Long id){
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id = " + id));
+        return cartRepository.countByMember(member);
+    }
 }
