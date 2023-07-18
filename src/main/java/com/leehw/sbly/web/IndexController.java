@@ -6,6 +6,7 @@ import com.leehw.sbly.service.cart.CartService;
 import com.leehw.sbly.service.goods.GoodsService;
 import com.leehw.sbly.service.goods.GoodsSubCategory;
 import com.leehw.sbly.service.orders.OrdersService;
+import com.leehw.sbly.web.Dto.goods.GoodsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
+
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -84,8 +85,22 @@ public class IndexController {
         return "subCategory";
     }
 
-    @GetMapping("/goods")
-    public String goods(){
+    @GetMapping("/goods/{id}")
+    public String goods(@PathVariable Long id, Model model, @LoginMember SessionMember member)
+    {
+        if(member != null) {
+            model.addAttribute("memberName", member.getName());
+            model.addAttribute("id", member.getId());
+            model.addAttribute("money", member.getMoney());
+            model.addAttribute("cartCount", cartService.cartCount(member.getId()));
+        }
+        GoodsResponseDto goods = goodsService.findById(id);
+        model.addAttribute("goods", goods);
+        List<GoodsSubCategory> subCategoryList =  goodsService.getSubCategory(goods.getMainCategory());
+        model.addAttribute("subCategory", subCategoryList);
+        model.addAttribute("mainCategoryName", goodsService.getMainCategoryName(goods.getMainCategory()));
+        model.addAttribute("subCategoryName", subCategoryList.get(goods.getSubCategory() - 1).getSubCategory_name());
+        model.addAttribute("mainCategory", goods.getMainCategory());
         return "goods";
     }
 }
