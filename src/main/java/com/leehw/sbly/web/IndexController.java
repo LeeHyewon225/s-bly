@@ -2,6 +2,8 @@ package com.leehw.sbly.web;
 
 import com.leehw.sbly.config.auth.Dto.SessionMember;
 import com.leehw.sbly.config.auth.LoginMember;
+import com.leehw.sbly.service.cart.CartService;
+import com.leehw.sbly.service.goods.GoodsService;
 import com.leehw.sbly.service.orders.OrdersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,9 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class IndexController {
 
+    private final CartService cartService;
     private final OrdersService ordersService;
+    private final GoodsService goodsService;
 
     @GetMapping("/")
     public String index(Model model, @LoginMember SessionMember member){
@@ -25,7 +29,11 @@ public class IndexController {
             model.addAttribute("memberName", member.getName());
             model.addAttribute("id", member.getId());
             model.addAttribute("money", member.getMoney());
+            model.addAttribute("cartCount", cartService.cartCount(member.getId()));
         }
+
+        model.addAttribute("goods", goodsService.findByRAND());
+
         return "index";
     }
 
@@ -36,6 +44,7 @@ public class IndexController {
             model.addAttribute("email", member.getEmail());
             model.addAttribute("id", member.getId());
             model.addAttribute("money", member.getMoney());
+            model.addAttribute("cartCount", cartService.cartCount(member.getId()));
         }
         model.addAttribute("orders", ordersService.findByMemberId(id));
         return "myPage";

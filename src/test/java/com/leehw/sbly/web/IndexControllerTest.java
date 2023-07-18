@@ -21,6 +21,6 @@ public class IndexControllerTest {
     public void 메인페이지_로딩(){
         String body = this.restTemplate.getForObject("/", String.class);
 
-        assertThat(body).contains("S-bly");
+        assertThat(body).contains("S B L Y");
     }
 }
