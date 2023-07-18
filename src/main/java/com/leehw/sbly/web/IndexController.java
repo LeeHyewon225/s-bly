@@ -50,6 +50,21 @@ public class IndexController {
         return "myPage";
     }
 
+    @GetMapping("/mainCategory/{mainCategory}")
+    public String mainCategory(@PathVariable int mainCategory, Model model, @LoginMember SessionMember member){
+        if(member != null) {
+            model.addAttribute("memberName", member.getName());
+            model.addAttribute("id", member.getId());
+            model.addAttribute("money", member.getMoney());
+            model.addAttribute("cartCount", cartService.cartCount(member.getId()));
+        }
+        model.addAttribute("goods", goodsService.findByMainCategory(mainCategory));
+        model.addAttribute("subCategory", goodsService.getSubCategory(mainCategory));
+        model.addAttribute("mainCategoryName", goodsService.getMainCategoryName(mainCategory));
+        model.addAttribute("mainCategory", mainCategory);
+        return "mainCategory";
+    }
+
     @GetMapping("/goods")
     public String goods(){
         return "goods";
