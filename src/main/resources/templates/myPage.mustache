@@ -3,16 +3,21 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="/">S B L Y</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <!--li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="#!">About</a></li-->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">All</a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">All</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item">All Products</a></li>
-                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <hr class="dropdown-divider"/>
+                        </li>
                         <li><a class="dropdown-item" href="/mainCategory/1">상의</a></li>
                         <li><a class="dropdown-item" href="/mainCategory/2">하의</a></li>
                         <li><a class="dropdown-item" href="/mainCategory/3">신발</a></li>
@@ -23,12 +28,24 @@
             <form class="d-flex">
                 {{#memberName}}
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <a href="/myPage/{{id}}" class="nav-link active" role="button">{{memberName}} 님</a></ul>&nbsp
-                    <button class="btn btn-outline-dark" type="submit">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">{{memberName}} 님</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/myPage/{{id}}">My page</a></li>
+                                <li>
+                                    <hr class="dropdown-divider"/>
+                                </li>
+                                <li><a class="dropdown-item" href="/logout">Log out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    &nbsp
+                    <a class="btn btn-outline-dark" type="submit" role="button" href="/cart/{{id}}">
                         <i class="bi-cart-fill me-1"></i>
                         Cart
                         <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartCount}}</span>
-                    </button>&nbsp
+                    </a>&nbsp
                     <!--a href="/logout" role="button" class="btn btn-outline-dark">Logout</a-->
                 {{/memberName}}
                 {{^memberName}}
@@ -46,7 +63,8 @@
         <div class="feature col" style="margin: 0px 200px 0px 200px;">
             <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
                 <i class="bi bi-person-fill"></i>
-            </div><br><br>
+            </div>
+            <br><br>
             <p><strong>{{email}} &nbsp|&nbsp {{memberName}}</strong></p>
             <p>보유 머니 &nbsp<strong>{{money}}원</strong></p>
         </div>
@@ -55,62 +73,43 @@
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-1">
         <div class="feature col" style="margin: 0px 200px 0px 200px;">
             <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                <i class="bi bi-cart-fill"></i>
-            </div><br><br>
-            <table>
-                <thead>
-                <tr>
-                    <th>주문 번호</th>
-                    <th>이름</th>
-                    <th>가격</th>
-                    <th>배송여부</th>
-                    <th>주문 날짜</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#orders}} <!--posts 라는 List 를 순회(for)-->
-                <tr>
-                    <td>{{id}}</td> <!--List 에서 뽑아낸 객체의 id 필드-->
-                    <td>{{goods.name}}</a></td> <!--List 에서 뽑아낸 객체의 title 필드-->
-                    <td>{{goods.price}}</td> <!--List 에서 뽑아낸 객체의 author 필드-->
-                    <td>{{deliver}}</td> <!--List 에서 뽑아낸 객체의 modifiedDate 필드-->
-                    <td>{{createdDate}}</td>
-                </tr>
-                {{/orders}}
-                </tbody>
-            </table>
+                <i class="bi bi-cart-plus-fill"></i>
+            </div>
+            <br><br>
+            {{#orders}}
+
+                {{id}}
+                {{goods.name}}
+                {{goods.price}}
+                {{deliver}}
+                {{createdDate}}
+
+            {{/orders}}
+            {{^orfers}}
+                주문 내역이 없습니다.
+            {{/orfers}}
+
         </div>
     </div>
     <div class="row g-4 py-3 row-cols-1 row-cols-lg-1">
         <div class="feature col" style="margin: 0px 200px 0px 200px;">
             <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                <i class="bi bi-cart-check-fill"></i>
-            </div><br><br>
-            <table>
-                <thead>
-                <tr>
-                    <th>주문 번호</th>
-                    <th>이름</th>
-                    <th>가격</th>
-                    <th>배송여부</th>
-                    <th>주문 날짜</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#orders}} <!--posts 라는 List 를 순회(for)-->
-                <tr>
-                    <td>{{id}}</td> <!--List 에서 뽑아낸 객체의 id 필드-->
-                    <td>{{goods.name}}</a></td> <!--List 에서 뽑아낸 객체의 title 필드-->
-                    <td>{{goods.price}}</td> <!--List 에서 뽑아낸 객체의 author 필드-->
-                    <td>{{deliver}}</td> <!--List 에서 뽑아낸 객체의 modifiedDate 필드-->
-                    <td>{{createdDate}}</td>
-                </tr>
-                {{/orders}}
-                </tbody>
-            </table>
+                <i class="bi bi-cart-dash-fill"></i>
+            </div>
+            <br><br>
+            {{#orders}}
+
+                {{id}}
+                {{goods.name}}
+                {{goods.price}}
+                {{deliver}}
+                {{createdDate}}
+
+            {{/orders}}
+            {{^orfers}}
+                환불/취소 내역이 없습니다.
+            {{/orfers}}
         </div>
     </div>
-
-
 </div>
 {{>layout/footer}}

@@ -6,6 +6,7 @@ import com.leehw.sbly.service.cart.CartService;
 import com.leehw.sbly.service.goods.GoodsService;
 import com.leehw.sbly.service.goods.GoodsSubCategory;
 import com.leehw.sbly.service.orders.OrdersService;
+import com.leehw.sbly.web.Dto.cart.CartResponseDto;
 import com.leehw.sbly.web.Dto.goods.GoodsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -104,5 +105,18 @@ public class IndexController {
         model.addAttribute("mainCategory", goods.getMainCategory());
         model.addAttribute("subCategory_id", goods.getSubCategory());
         return "goods";
+    }
+
+    @GetMapping("/cart/{id}")
+    public String cart(@PathVariable Long id, Model model, @LoginMember SessionMember member){
+        if(member != null) {
+            model.addAttribute("memberName", member.getName());
+            model.addAttribute("id", member.getId());
+            model.addAttribute("money", member.getMoney());
+            model.addAttribute("cartCount", cartService.cartCount(member.getId()));
+        }
+        List<CartResponseDto> cartResponseDtoList = cartService.findByMemberId(id);
+        model.addAttribute("cartList", cartResponseDtoList);
+        return "cart";
     }
 }

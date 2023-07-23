@@ -36,12 +36,23 @@
             <form class="d-flex">
                 {{#memberName}}
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <a href="/myPage/{{id}}" class="nav-link active" role="button">{{memberName}} 님</a></ul>&nbsp
-                    <button class="btn btn-outline-dark" type="submit">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">{{memberName}} 님</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/myPage/{{id}}">My Page</a></li>
+                                <li>
+                                    <hr class="dropdown-divider"/>
+                                </li>
+                                <li><a class="dropdown-item" href="/logout">Log out</a></li>
+                            </ul>
+                        </li>
+                    </ul>&nbsp
+                    <a class="btn btn-outline-dark" type="submit" role="button" href="/cart/{{id}}">
                         <i class="bi-cart-fill me-1"></i>
                         Cart
                         <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartCount}}</span>
-                    </button>&nbsp
+                    </a>&nbsp
                     <!--a href="/logout" role="button" class="btn btn-outline-dark">Logout</a-->
                 {{/memberName}}
                 {{^memberName}}
