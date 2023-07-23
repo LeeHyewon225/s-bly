@@ -7,10 +7,12 @@ import lombok.Getter;
 
 @Getter
 public class CartResponseDto {
+    private Long id;
     private Member member;
     private Goods goods;
 
     public CartResponseDto(Cart cart){
+        this.id = cart.getId();
         this.member = cart.getMember();
         this.goods = cart.getGoods();
     }

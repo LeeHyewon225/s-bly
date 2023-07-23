@@ -31,6 +31,11 @@ public class CartService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id = " + cartSaveRequestDto.getMember_id()));
         Goods goods = goodsRepository.findById(cartSaveRequestDto.getGoods_id())
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다. id = " + cartSaveRequestDto.getGoods_id()));
+        List<Cart> cartList = cartRepository.findByMemberAndGoods(member, goods);
+
+        if(cartList.size() == 1)
+            return -1L;
+
         return cartRepository.save(Cart.builder()
                 .member(member)
                 .goods(goods)
