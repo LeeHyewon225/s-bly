@@ -82,6 +82,7 @@ public class IndexController {
         model.addAttribute("mainCategoryName", goodsService.getMainCategoryName(mainCategory));
         model.addAttribute("subCategoryName", subCategoryList.get(subCategory - 1).getSubCategory_name());
         model.addAttribute("mainCategory", mainCategory);
+        model.addAttribute("subCategory_id", subCategory);
         return "subCategory";
     }
 
@@ -101,6 +102,7 @@ public class IndexController {
         model.addAttribute("mainCategoryName", goodsService.getMainCategoryName(goods.getMainCategory()));
         model.addAttribute("subCategoryName", subCategoryList.get(goods.getSubCategory() - 1).getSubCategory_name());
         model.addAttribute("mainCategory", goods.getMainCategory());
+        model.addAttribute("subCategory_id", goods.getSubCategory());
         return "goods";
     }
 }

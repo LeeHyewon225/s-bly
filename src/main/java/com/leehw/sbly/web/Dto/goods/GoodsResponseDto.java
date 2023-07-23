@@ -6,6 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class GoodsResponseDto {
+    private Long id;
     private String name;
     private int price;
     private String image;
@@ -15,6 +16,7 @@ public class GoodsResponseDto {
 
     @Builder
     public GoodsResponseDto(Goods goods){
+        this.id = goods.getId();
         this.name = goods.getName();
         this.price = goods.getPrice();
         this.image = goods.getImage();

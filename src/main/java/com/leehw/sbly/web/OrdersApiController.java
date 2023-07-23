@@ -4,6 +4,7 @@ import com.leehw.sbly.domain.order.OrdersRepository;
 import com.leehw.sbly.service.orders.OrdersService;
 import com.leehw.sbly.web.Dto.orders.OrdersSaveRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -12,8 +13,10 @@ public class OrdersApiController {
     private final OrdersService ordersService;
 
     @PostMapping("/api/orders")
-    public Long save(@RequestBody OrdersSaveRequestDto ordersSaveRequestDto){
-        return ordersService.save(ordersSaveRequestDto);
+    public Long save(@RequestBody OrdersSaveRequestDto ordersSaveRequestDto, Model model){
+        Long result = ordersService.save(ordersSaveRequestDto);
+        model.addAttribute("result", result);
+        return result;
     }
 
     @PutMapping("/api/orders/{id}")

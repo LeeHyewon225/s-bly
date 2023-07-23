@@ -1,6 +1,8 @@
 package com.leehw.sbly.config.auth;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/", "/mainCategory/{mainCategory}", "/subCategory/{mainCategory}/{subCategory}", "/goods/{id}", "/css/**", "/bootstrap/**", "/iamges/**", "/js/**", "/h2-console/**").permitAll()
+                    .antMatchers("/", "/mainCategory/{mainCategory}", "/subCategory/{mainCategory}/{subCategory}", "/css/**", "/bootstrap/**", "/iamges/**", "/js/**", "/h2-console/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .logout()
@@ -27,5 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .oauth2Login()
                         .userInfoEndpoint()
                             .userService(customOAuth2UserService);
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception{
+        return super.authenticationManagerBean();
     }
 }
