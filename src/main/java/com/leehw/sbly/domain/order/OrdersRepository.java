@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrdersRepository extends JpaRepository<Orders, Long> {
-    List<Orders> findByMember(Member member);
+    List<Orders> findByMemberAndCancelOrder(Member member, boolean cancelOrder);
 }

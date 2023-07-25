@@ -50,7 +50,8 @@ public class IndexController {
             model.addAttribute("money", member.getMoney());
             model.addAttribute("cartCount", cartService.cartCount(member.getId()));
         }
-        model.addAttribute("orders", ordersService.findByMemberId(id));
+        model.addAttribute("orders", ordersService.findByMemberId(id, false));
+        model.addAttribute("cancelOrders", ordersService.findByMemberId(id, true));
         return "myPage";
     }
 

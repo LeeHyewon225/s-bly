@@ -54,16 +54,18 @@ public class OrdersService {
     }
 
     @Transactional(readOnly = true)
-    public List<OrderResponseDto> findByMemberId(Long id){
+    public List<OrderResponseDto> findByMemberId(Long id, boolean cancelOrder){
+        System.out.println("--------");
         Member member = memberRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. + id = " + id));
 
-        List<Orders> ordersList = ordersRepository.findByMember(member);
+        List<Orders> ordersList = ordersRepository.findByMemberAndCancelOrder(member, cancelOrder);
         for (Orders orders : ordersList){
+            System.out.println(orders.getId());
             if(orders.isDeliver() == false)
                 orders.calculateDelivery();
         }
-        return ordersRepository.findByMember(member).stream()
+        return ordersRepository.findByMemberAndCancelOrder(member, cancelOrder).stream()
                 .map(OrderResponseDto::new)
                 .collect(Collectors.toList());
     }
