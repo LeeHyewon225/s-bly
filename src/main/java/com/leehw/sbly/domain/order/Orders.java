@@ -29,13 +29,13 @@ public class Orders extends BaseTimeEntity {
     private Goods goods;
 
     @Column
-    private int deliver;
+    private boolean deliver;
 
     @Column
-    private int cancelOrder;
+    private boolean cancelOrder;
 
     @Builder
-    public Orders(Member member, Goods goods, int deliver, int cancelOrder){
+    public Orders(Member member, Goods goods, boolean deliver, boolean cancelOrder){
         this.member = member;
         this.goods = goods;
         this.deliver = deliver;
@@ -43,11 +43,11 @@ public class Orders extends BaseTimeEntity {
     }
 
     public void cancel(){
-        this.cancelOrder = 1;
+        this.cancelOrder = true;
     }
 
     public void calculateDelivery(){
         if(this.getCreatedDate().plusDays(goods.getDeliveryTime()).isBefore(LocalDateTime.now()))
-            deliver = 1;
+            deliver = true;
     }
 }

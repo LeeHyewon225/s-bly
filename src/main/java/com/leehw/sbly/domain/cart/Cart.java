@@ -37,8 +37,8 @@ public class Cart {
         return Orders.builder()
                 .member(member)
                 .goods(goods)
-                .deliver(0)
-                .cancelOrder(0)
+                .deliver(false)
+                .cancelOrder(false)
                 .build();
     }
 }

@@ -81,8 +81,14 @@
                 {{id}}
                 {{goods.name}}
                 {{goods.price}}
-                {{deliver}}
+                {{#deliver}}
+                    is delivered
+                {{/deliver}}
+                {{^deliver}}
+                    is not delivered
+                {{/deliver}}
                 {{createdDate}}
+                <br>
 
             {{/orders}}
             {{^orders}}
@@ -104,6 +110,7 @@
                 {{goods.price}}
                 {{deliver}}
                 {{createdDate}}
+                <br>
 
             {{/orders}}
             {{^orders}}

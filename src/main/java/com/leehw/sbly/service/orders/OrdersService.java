@@ -40,8 +40,8 @@ public class OrdersService {
         return ordersRepository.save(Orders.builder()
                 .member(member)
                 .goods(goods)
-                .deliver(0)
-                .cancelOrder(0)
+                .deliver(false)
+                .cancelOrder(false)
                 .build()).getId();
     }
 
@@ -60,7 +60,7 @@ public class OrdersService {
 
         List<Orders> ordersList = ordersRepository.findByMember(member);
         for (Orders orders : ordersList){
-            if(orders.getDeliver() == 0)
+            if(orders.isDeliver() == false)
                 orders.calculateDelivery();
         }
         return ordersRepository.findByMember(member).stream()
