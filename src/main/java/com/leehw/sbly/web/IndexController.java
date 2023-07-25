@@ -114,6 +114,8 @@ public class IndexController {
             model.addAttribute("id", member.getId());
             model.addAttribute("money", member.getMoney());
             model.addAttribute("cartCount", cartService.cartCount(member.getId()));
+            if(cartService.cartCount(member.getId())!=0)
+                model.addAttribute("cartCountIsNotZero", 1);
         }
         List<CartResponseDto> cartResponseDtoList = cartService.findByMemberId(id);
         model.addAttribute("cartList", cartResponseDtoList);

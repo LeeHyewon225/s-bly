@@ -63,7 +63,7 @@ public class CartService {
             price_sum += cart.getGoods().getPrice();
         }
         if (price_sum > member.getMoney())
-            return -1L;
+            return (long) price_sum;
         member.pricecalculate(price_sum);
         for (Long i : orderCart) {
             Cart cart = cartRepository.findById(i)
@@ -71,7 +71,7 @@ public class CartService {
             cartRepository.delete(cart);
             ordersRepository.save(cart.toOrders());
         }
-        return 1L;
+        return -1L;
     }
 
     @Transactional(readOnly = true)

@@ -27,6 +27,29 @@ var main = {
                 _this.deleteCart();
         });
 
+        $('#order-cart').click(function() {
+            if($("input[type=checkbox][name=listGroupRadioGrid]:checked").length == 0)
+                alert('주문할 상품을 선택해주세요.');
+            else
+                _this.orderCart();
+        });
+
+        $('#checkAll').click(function(){
+            if($('#checkAll').is(":checked"))
+                $("input[type=checkbox][name=listGroupRadioGrid]").prop("checked", true);
+            else
+                $("input[type=checkbox][name=listGroupRadioGrid]").prop("checked", false);
+        });
+
+        $("input[type=checkbox][name=listGroupRadioGrid]").click(function(){
+            var all = $("input[name=listGroupRadioGrid]").length;
+            var checked = $("input[name=listGroupRadioGrid]:checked").length;
+
+            if(all == checked)
+                $("#checkAll").prop("checked", true);
+            else
+                $("#checkAll").prop("checked", false);
+        });
     },
 
     order : function(){
@@ -43,7 +66,7 @@ var main = {
             data: JSON.stringify(data)
         }).done(function(result){
             if(result != -1){
-                if(confirm('상품을 결제하였습니다.\n주문 내역을 확인하시겠습니까?'))
+                if(confirm('상품을 주문하였습니다.\n주문 내역을 확인하시겠습니까?'))
                     window.location.href='/myPage/' + $('#member_id').val();
             }
             else{
@@ -80,11 +103,10 @@ var main = {
     },
     deleteCart : function(){
 
-        let chk_arr = [];
+        let delete_cart = [];
 
-        // 1.
         $("input[type=checkbox][name=listGroupRadioGrid]:checked").each(function(){
-            chk_arr.push($(this).val()); // push: 배열에 값 삽입
+            delete_cart.push($(this).val()); // push: 배열에 값 삽입
         });
 
         $.ajax({
@@ -92,14 +114,38 @@ var main = {
          url: '/api/cart',
          dataType: 'json',
          contentType:'application/json; charset=utf-8',
-         data: JSON.stringify(chk_arr)
+         data: JSON.stringify(delete_cart)
         }).done(function(result){
-         if(result == 1){
-             alert('상품을 장바구니에서 삭제하였습니다.')
-             window.location.href='/cart/' + $('#member_id').val();
+         alert('상품을 장바구니에서 삭제하였습니다.')
+         window.location.href='/cart/' + $('#member_id').val();
+        }).fail(function(error){
+         alert(JSON.stringify(error));
+        });
+    },
+    orderCart : function(){
+
+        let order_cart = [];
+
+        $("input[type=checkbox][name=listGroupRadioGrid]:checked").each(function(){
+            order_cart.push($(this).val());
+        });
+
+        $.ajax({
+         type: 'DELETE',
+         url: '/api/cart/' + $('#member_id').val(),
+         dataType: 'json',
+         contentType:'application/json; charset=utf-8',
+         data: JSON.stringify(order_cart)
+        }).done(function(result){
+         if(result == -1){
+             if(confirm('상품을 주문하였습니다.\n주문 내역을 확인하시겠습니까?'))
+                window.location.href='/myPage/' + $('#member_id').val();
+             else
+                window.location.href='/cart/' + $('#member_id').val();
          }
          else{
-             alert('삭제할 상품을 선택해주세요.')
+             if(confirm('보유머니가 부족합니다.\n충전하시겠습니까?'))
+                window.location.href='/myPage/' + $('#member_id').val();
          }
         }).fail(function(error){
          alert(JSON.stringify(error));
