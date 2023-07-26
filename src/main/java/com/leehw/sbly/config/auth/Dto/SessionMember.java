@@ -10,7 +10,7 @@ public class SessionMember implements Serializable {
     private Long id;
     private String name;
     private String email;
-    private int money;
+    private long money;
 
     public SessionMember(Member member){
         this.id = member.getId();

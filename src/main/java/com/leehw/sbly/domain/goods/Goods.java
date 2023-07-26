@@ -24,7 +24,7 @@ public class Goods {
     private String name;
 
     @Column(nullable = false)
-    private int price;
+    private long price;
 
     @Column
     private String image;

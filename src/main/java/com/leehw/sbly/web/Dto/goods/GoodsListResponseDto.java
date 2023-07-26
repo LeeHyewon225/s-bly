@@ -7,7 +7,7 @@ import lombok.Getter;
 public class GoodsListResponseDto {
     private long id;
     private String name;
-    private int price;
+    private long price;
     private String image;
 
     public GoodsListResponseDto(Goods entity){

@@ -56,14 +56,14 @@ public class CartService {
     public Long order(Long id, List<Long> orderCart) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id = " + id));
-        int price_sum = 0;
+        long price_sum = 0;
         for (Long i : orderCart) {
             Cart cart = cartRepository.findById(i)
                     .orElseThrow(() -> new IllegalArgumentException("해당 장바구니 상품이 없습니다. id +" + i));
             price_sum += cart.getGoods().getPrice();
         }
         if (price_sum > member.getMoney())
-            return (long) price_sum;
+            return  price_sum - member.getMoney();
         member.pricecalculate(price_sum);
         for (Long i : orderCart) {
             Cart cart = cartRepository.findById(i)

@@ -50,6 +50,12 @@ var main = {
             else
                 $("#checkAll").prop("checked", false);
         });
+
+        $('#chargeMoney').on('click', function(){
+            var chargeMoney = prompt("충전할 금액을 입력해 주세요.")
+            if(chargeMoney != "" && chargeMoney != null)
+                _this.charge(chargeMoney);
+        });
     },
 
     order : function(){
@@ -65,12 +71,12 @@ var main = {
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function(result){
-            if(result != -1){
+            if(result == -1){
                 if(confirm('상품을 주문하였습니다.\n주문 내역을 확인하시겠습니까?'))
                     window.location.href='/myPage/' + $('#member_id').val();
             }
             else{
-                if(confirm('보유머니가 부족합니다.\n충전하시겠습니까?'))
+                if(confirm('보유머니가 ' + result +'원 부족합니다.\n충전하시겠습니까?'))
                     window.location.href='/myPage/' + $('#member_id').val();
             }
         }).fail(function(error){
@@ -144,14 +150,29 @@ var main = {
                 window.location.href='/cart/' + $('#member_id').val();
          }
          else{
-             if(confirm('보유머니가 부족합니다.\n충전하시겠습니까?'))
+             if(confirm('보유머니가 ' + result + '원 부족합니다.\n충전하시겠습니까?'))
                 window.location.href='/myPage/' + $('#member_id').val();
          }
         }).fail(function(error){
          alert(JSON.stringify(error));
         });
-    }
+    },
+    charge : function(chargeMoney){
+        money = Number(chargeMoney);
 
+        $.ajax({
+            type: 'PUT',
+            url: '/api/member/' + $('#member_id').val(),
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(money)
+        }).done(function(){
+            alert('충전하였습니다.')
+            window.location.href='/myPage/' + $('#member_id').val();
+        }).fail(function(error){
+            alert('올바른 형식을 입력해 주세요.');
+        });
+    }
 };
 
 main.init();

@@ -8,7 +8,7 @@ import lombok.Getter;
 public class GoodsResponseDto {
     private Long id;
     private String name;
-    private int price;
+    private long price;
     private String image;
     private int mainCategory;
     private int subCategory;
