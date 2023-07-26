@@ -27,7 +27,7 @@ public class Member{
     private String name;
 
     @Column
-    private int money;
+    private long money;
 
     @OneToMany(mappedBy = "member")
     private List<Orders> orders = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Member{
     private List<Cart> carts = new ArrayList<>();
 
     @Builder
-    public Member(String email, String name, int money){
+    public Member(String email, String name, long money){
         this.email = email;
         this.name = name;
         this.money = money;
@@ -48,7 +48,11 @@ public class Member{
         return this;
     }
 
-    public void pricecalculate(int price){
+    public void pricecalculate(long price){
         money -= price;
+    }
+
+    public void chargeMoney(long chargeMoney){
+        this.money += chargeMoney;
     }
 }
