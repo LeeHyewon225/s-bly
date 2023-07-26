@@ -26,43 +26,43 @@ public class OrdersService {
     private final GoodsRepository goodsRepository;
 
     @Transactional
-    public Long save(OrdersSaveRequestDto ordersSaveRequestDto){
+    public Long save(OrdersSaveRequestDto ordersSaveRequestDto) {
         Long member_id = ordersSaveRequestDto.getMember_id();
         Long goods_id = ordersSaveRequestDto.getGoods_id();
 
         Member member = memberRepository.findById(member_id)
-                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. id = " + member_id));
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id = " + member_id));
         Goods goods = goodsRepository.findById(goods_id)
-                .orElseThrow(()->new IllegalArgumentException("해당 상품이 없습니다. id = " + goods_id));
-        if(member.getMoney() < goods.getPrice())
-            return -1L;
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다. id = " + goods_id));
+        if (member.getMoney() < goods.getPrice())
+            return goods.getPrice() - member.getMoney();
         member.pricecalculate(goods.getPrice());
-        return ordersRepository.save(Orders.builder()
+        ordersRepository.save(Orders.builder()
                 .member(member)
                 .goods(goods)
                 .deliver(false)
                 .cancelOrder(false)
                 .build()).getId();
+        return -1L;
     }
 
     @Transactional
-    public Long cancel(Long id){
+    public Long cancel(Long id) {
         Orders orders = ordersRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("해당 주문이 없습니다. id = " + id));
+                .orElseThrow(() -> new IllegalArgumentException("해당 주문이 없습니다. id = " + id));
         orders.cancel();
         return id;
     }
 
     @Transactional(readOnly = true)
-    public List<OrderResponseDto> findByMemberId(Long id, boolean cancelOrder){
-        System.out.println("--------");
+    public List<OrderResponseDto> findByMemberId(Long id, boolean cancelOrder) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다. + id = " + id));
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. + id = " + id));
 
         List<Orders> ordersList = ordersRepository.findByMemberAndCancelOrder(member, cancelOrder);
-        for (Orders orders : ordersList){
+        for (Orders orders : ordersList) {
             System.out.println(orders.getId());
-            if(orders.isDeliver() == false)
+            if (orders.isDeliver() == false)
                 orders.calculateDelivery();
         }
         return ordersRepository.findByMemberAndCancelOrder(member, cancelOrder).stream()

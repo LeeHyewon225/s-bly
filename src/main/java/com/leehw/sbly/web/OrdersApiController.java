@@ -13,9 +13,8 @@ public class OrdersApiController {
     private final OrdersService ordersService;
 
     @PostMapping("/api/orders")
-    public Long save(@RequestBody OrdersSaveRequestDto ordersSaveRequestDto, Model model){
+    public Long save(@RequestBody OrdersSaveRequestDto ordersSaveRequestDto){
         Long result = ordersService.save(ordersSaveRequestDto);
-        model.addAttribute("result", result);
         return result;
     }
 
