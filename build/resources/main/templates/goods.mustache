@@ -3,13 +3,16 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="/">S B L Y</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <!--li class="nav-item"><a class="nav-link active" aria-current="page" href="#!"></a></li>
                 <li class="nav-item"><a class="nav-link" href="#!">About</a></li-->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">All</a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">All</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/mainCategory/1">상의</a></li>
                         <li><a class="dropdown-item" href="/mainCategory/2">하의</a></li>
@@ -18,10 +21,12 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{mainCategoryName}}</a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">{{mainCategoryName}}</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {{#subCategory}}
-                            <li><a class="dropdown-item" href="/subCategory/{{mainCategory}}/{{subCategory_id}}">{{subCategory_name}}</a></li>
+                            <li><a class="dropdown-item"
+                                   href="/subCategory/{{mainCategory}}/{{subCategory_id}}">{{subCategory_name}}</a></li>
                         {{/subCategory}}
                     </ul>
                 </li>
@@ -43,7 +48,8 @@
                                 <li><a class="dropdown-item" href="/logout">Log out</a></li>
                             </ul>
                         </li>
-                    </ul>&nbsp
+                    </ul>
+                    &nbsp
                     <a class="btn btn-outline-dark" type="submit" role="button" href="/cart/{{id}}">
                         <i class="bi-cart-fill me-1"></i>
                         Cart
@@ -62,10 +68,11 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
+                                       src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..."/></div>
             <div class="col-md-6">
 
-                    <span>{{goods.deliveryTime}}일 후 배송 완료</span><br><br>
+                <span>{{goods.deliveryTime}}일 후 배송 완료</span><br><br>
 
                 <h1 class="display-5 fw-bolder">{{goods.name}}</h1><br>
                 <div class="fs-5 mb-5">
@@ -75,7 +82,8 @@
                     <button class="btn btn-outline-dark flex-shrink-0" type="button" id="buy-now">
                         <i class="bi bi-credit-card-fill"></i>
                         &nbspBuy Now
-                    </button>&nbsp&nbsp&nbsp
+                    </button>
+                    &nbsp&nbsp&nbsp
                     <button class="btn btn-outline-dark flex-shrink-0" type="button" id="add-cart">
                         <i class="bi-cart-fill me-1"></i>
                         Add to cart

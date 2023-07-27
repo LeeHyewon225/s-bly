@@ -11004,3 +11004,15 @@ white-space: nowrap;
   filter: none;
   opacity: .5;
 }
+#wrapper{
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 60px;
+}
+footer{
+  position : relative;
+  transform : translateY(-100%);
+}
+html, body {
+    height: 100%
+}
