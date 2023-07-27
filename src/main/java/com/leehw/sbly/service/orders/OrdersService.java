@@ -59,14 +59,18 @@ public class OrdersService {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. + id = " + id));
 
-        List<Orders> ordersList = ordersRepository.findByMemberAndCancelOrder(member, cancelOrder);
+        List<Orders> ordersList = ordersRepository.findByMemberAndCancelOrderOrderByCreatedDateDesc(member, cancelOrder);
         for (Orders orders : ordersList) {
-            System.out.println(orders.getId());
             if (orders.isDeliver() == false)
                 orders.calculateDelivery();
         }
-        return ordersRepository.findByMemberAndCancelOrder(member, cancelOrder).stream()
-                .map(OrderResponseDto::new)
-                .collect(Collectors.toList());
+        if (cancelOrder)
+            return ordersRepository.findByMemberAndCancelOrderOrderByModifiedDateDesc(member, cancelOrder).stream()
+                    .map(OrderResponseDto::new)
+                    .collect(Collectors.toList());
+        else
+            return ordersRepository.findByMemberAndCancelOrderOrderByCreatedDateDesc(member, cancelOrder).stream()
+                    .map(OrderResponseDto::new)
+                    .collect(Collectors.toList());
     }
 }

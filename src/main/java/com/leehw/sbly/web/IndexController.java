@@ -50,7 +50,9 @@ public class IndexController {
             model.addAttribute("money", member.getMoney());
             model.addAttribute("cartCount", cartService.cartCount(member.getId()));
         }
+        //주문 내역
         model.addAttribute("orders", ordersService.findByMemberId(id, false));
+        //주문 취소 내역
         model.addAttribute("cancelOrders", ordersService.findByMemberId(id, true));
         return "myPage";
     }

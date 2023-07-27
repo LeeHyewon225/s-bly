@@ -15,6 +15,7 @@ public class OrderResponseDto {
     private boolean deliver;
     private boolean cancelDeliver;
     private LocalDateTime createdDate;
+    private LocalDateTime modifiedDate;
 
     public OrderResponseDto(Orders orders){
         this.id = orders.getId();
@@ -23,5 +24,6 @@ public class OrderResponseDto {
         this.deliver = orders.isDeliver();
         this.cancelDeliver = orders.isCancelOrder();
         this.createdDate = orders.getCreatedDate();
+        this.modifiedDate = orders.getModifiedDate();
     }
 }
