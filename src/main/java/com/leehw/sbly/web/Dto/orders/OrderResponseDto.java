@@ -6,6 +6,7 @@ import com.leehw.sbly.domain.order.Orders;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 public class OrderResponseDto {
@@ -14,8 +15,8 @@ public class OrderResponseDto {
     private Goods goods;
     private boolean deliver;
     private boolean cancelDeliver;
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
+    private String createdDate;
+    private String modifiedDate;
 
     public OrderResponseDto(Orders orders){
         this.id = orders.getId();
@@ -23,7 +24,7 @@ public class OrderResponseDto {
         this.goods = orders.getGoods();
         this.deliver = orders.isDeliver();
         this.cancelDeliver = orders.isCancelOrder();
-        this.createdDate = orders.getCreatedDate();
-        this.modifiedDate = orders.getModifiedDate();
+        this.createdDate = orders.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
+        this.modifiedDate = orders.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
     }
 }
