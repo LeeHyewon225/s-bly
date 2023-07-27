@@ -28,7 +28,7 @@
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">{{memberName}} 님</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/myPage/{{id}}">My page</a></li>
+                                <li><a class="dropdown-item" href="/myPage/{{mid}}">My page</a></li>
                                 <li>
                                     <hr class="dropdown-divider"/>
                                 </li>
@@ -37,7 +37,7 @@
                         </li>
                     </ul>
                     &nbsp
-                    <a class="btn btn-outline-dark" type="submit" role="button" href="/cart/{{id}}">
+                    <a class="btn btn-outline-dark" type="submit" role="button" href="/cart/{{mid}}">
                         <i class="bi-cart-fill me-1"></i>
                         Cart
                         <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartCount}}</span>
@@ -61,7 +61,8 @@
     <br>
     <p><strong>{{email}} &nbsp|&nbsp {{memberName}}</strong></p>
     <p>보유 머니 &nbsp<strong>{{money}}원</strong>&nbsp&nbsp
-    <button class="btn btn-outline-dark mt-auto" type="button" id="chargeMoney">충전하기</button></p>
+        <button class="btn btn-outline-dark mt-auto" type="button" id="chargeMoney">충전하기</button>
+    </p>
     <br>
     <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
         <i class="bi bi-cart-plus-fill"></i>
@@ -83,11 +84,12 @@
                                       style="margin: 0px 0px 10px 0px;">View
                     options</a><br>&nbsp&nbsp&nbsp&nbsp
                     {{#deliver}}
-                        <strong>&nbsp&nbsp&nbsp배송완료</strong>
-                        {{!<span class="d-block small opacity-75">배송 날짜 : {{modifiedDate}}
+                        <font color="blue"><strong>&nbsp&nbsp&nbsp배송완료</strong></font>
+                    {{!<span class="d-block small opacity-75">배송 날짜 : {{modifiedDate}}
                     {{/deliver}}
                     {{^deliver}}
-                        <button class="btn btn-outline-dark flex-shrink-0" type="button" id="cancel-orders">
+                        <button class="btn btn-outline-dark flex-shrink-0" type="button" name="cancel-orders"
+                                id="{{id}}" value="{{id}}">
                             <i class="bi bi-cart-dash-fill"></i>
                             Refund
                         </button>
@@ -119,7 +121,7 @@
                     &nbsp&nbsp&nbsp<a class="btn btn-outline-dark mt-auto" href="/goods/{{goods.id}}"
                                       style="margin: 0px 0px 10px 0px;">View
                     options</a><br>&nbsp&nbsp&nbsp&nbsp
-                    <strong>&nbsp&nbsp&nbsp취소완료</strong><br>
+                    <font color="red"><strong>&nbsp&nbsp&nbsp취소완료</strong></font><br>
                     {{!<span class="d-block small opacity-75">취소 날짜 : {{modifiedDate}}
                 </div>
             </div>
@@ -129,6 +131,6 @@
         주문 취소 내역이 없습니다.
     {{/cancelOrders}}
 </div>
-<input id="member_id" value="{{id}}" type="hidden">
+<input id="member_id" value="{{mid}}" type="hidden">
 
 {{>layout/footer}}

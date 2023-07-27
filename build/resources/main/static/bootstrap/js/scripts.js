@@ -56,6 +56,11 @@ var main = {
             if(chargeMoney != "" && chargeMoney != null)
                 _this.charge(chargeMoney);
         });
+
+        $('button[name=cancel-orders]').on('click', function(){
+            if(confirm('주문을 취소하시겠습니까?'))
+                _this.cancel_order($(this).attr("id"));
+        });
     },
 
     order : function(){
@@ -172,7 +177,22 @@ var main = {
         }).fail(function(error){
             alert('올바른 형식을 입력해 주세요.');
         });
-    }
+    },
+    cancel_order : function(order_id){
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/orders/' + order_id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify()
+        }).done(function(result){
+            alert("주문을 취소하였습니다.");
+            window.location.href='/myPage/' + $('#member_id').val();
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        });
+    },
 };
 
 main.init();

@@ -46,7 +46,7 @@ public class IndexController {
         if(member != null) {
             model.addAttribute("memberName", member.getName());
             model.addAttribute("email", member.getEmail());
-            model.addAttribute("id", member.getId());
+            model.addAttribute("mid", member.getId());
             model.addAttribute("money", member.getMoney());
             model.addAttribute("cartCount", cartService.cartCount(member.getId()));
         }
