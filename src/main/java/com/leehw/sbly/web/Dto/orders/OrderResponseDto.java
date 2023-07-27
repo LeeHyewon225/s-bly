@@ -17,6 +17,7 @@ public class OrderResponseDto {
     private boolean cancelDeliver;
     private String createdDate;
     private String modifiedDate;
+    private String deliverDate;
 
     public OrderResponseDto(Orders orders){
         this.id = orders.getId();
@@ -24,7 +25,8 @@ public class OrderResponseDto {
         this.goods = orders.getGoods();
         this.deliver = orders.isDeliver();
         this.cancelDeliver = orders.isCancelOrder();
-        this.createdDate = orders.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
-        this.modifiedDate = orders.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
+        this.createdDate = orders.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+        this.modifiedDate = orders.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+        this.deliverDate = orders.getCreatedDate().plusDays(orders.getGoods().getDeliveryTime()).format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
     }
 }

@@ -74,15 +74,18 @@
                 <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0"
                                            src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
                                            alt="..."/></div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <strong class="fw-semibold">{{goods.name}}</strong>
                     <span class="d-block small opacity-75">{{goods.price}} 원</span>
                     {{#deliver}}
-                        <span class="d-block small opacity-75">배송 날짜 : {{createdDate}}</span>
+                        <span class="d-block small opacity-75">배송 날짜 : {{deliverDate}}</span>
+                    {{/deliver}}
+                    {{^deliver}}
+                        <span class="d-block small opacity-75">배송 예상 날짜 : {{deliverDate}}</span>
                     {{/deliver}}
                     <span class="d-block small opacity-75">주문 날짜 : {{createdDate}}</span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     &nbsp&nbsp&nbsp<a class="btn btn-outline-dark mt-auto" href="/goods/{{goods.id}}"
                                       style="margin: 0px 0px 10px 0px;">View
                     options</a><br>&nbsp&nbsp&nbsp&nbsp
@@ -115,13 +118,13 @@
                 <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0"
                                            src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
                                            alt="..."/></div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <strong class="fw-semibold">{{goods.name}}</strong>
                     <span class="d-block small opacity-75">{{goods.price}} 원</span>
-                    <span class="d-block small opacity-75">취소 날짜:{{modifiedDate}}</span>
-                    <span class="d-block small opacity-75">주문 날짜:{{createdDate}}</span>
+                    <span class="d-block small opacity-75">취소 날짜 : {{modifiedDate}}</span>
+                    <span class="d-block small opacity-75">주문 날짜 : {{createdDate}}</span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     &nbsp&nbsp&nbsp<a class="btn btn-outline-dark mt-auto" href="/goods/{{goods.id}}"
                                       style="margin: 0px 0px 10px 0px;">View
                     options</a><br>&nbsp&nbsp&nbsp&nbsp
