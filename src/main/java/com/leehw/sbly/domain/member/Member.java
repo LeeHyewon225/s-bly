@@ -1,6 +1,7 @@
 package com.leehw.sbly.domain.member;
 
 import com.leehw.sbly.domain.cart.Cart;
+import com.leehw.sbly.domain.goods.Goods;
 import com.leehw.sbly.domain.order.Orders;
 import lombok.Builder;
 import lombok.Getter;
@@ -54,5 +55,9 @@ public class Member{
 
     public void chargeMoney(long chargeMoney){
         this.money += chargeMoney;
+    }
+
+    public void refund(Goods goods){
+        this.money += goods.getPrice();
     }
 }

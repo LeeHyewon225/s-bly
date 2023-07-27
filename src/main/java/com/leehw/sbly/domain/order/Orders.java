@@ -44,6 +44,7 @@ public class Orders extends BaseTimeEntity {
 
     public void cancel(){
         this.cancelOrder = true;
+        member.refund(goods);
     }
 
     public void calculateDelivery(){
