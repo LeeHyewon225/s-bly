@@ -17,4 +17,8 @@ public class MemberService {
         member.chargeMoney(moneyChargeRequestDto.getMoney());
         return id;
     }
+
+    public Member findById(Long id){
+        return memberRepository.findById(id).get();
+    }
 }
