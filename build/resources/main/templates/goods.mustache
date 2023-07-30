@@ -1,31 +1,14 @@
 {{>layout/header}}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">{{mainCategoryName}}</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {{#subCategory}}
-                            <li><a class="dropdown-item"
-                                   href="/subCategory/mainCategory_id={{mainCategory}}/subCategory_id={{subCategory_id}}">{{subCategory_name}}</a></li>
-                        {{/subCategory}}
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/subCategory/mainCategory_id={{mainCategory}}/subCategory_id={{subCategory_id}}">{{subCategoryName}}</a>
-                </li>
-            </ul>
+{{>layout/mainCategory_list}}
+{{>layout/subCategory_list}}
 {{>layout/login}}
-        </div>
-    </div>
-</nav>
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
                                        src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..."/></div>
             <div class="col-md-6">
-
                 <span>{{goods.deliveryTime}}일 후 배송 완료</span><br><br>
-
                 <h1 class="display-5 fw-bolder">{{goods.name}}</h1><br>
                 <div class="fs-5 mb-5">
                     <span>{{goods.price}} 원</span>
