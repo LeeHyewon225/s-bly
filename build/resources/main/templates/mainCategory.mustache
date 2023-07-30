@@ -1,25 +1,4 @@
 {{>layout/header}}
-<!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="/">S B L Y</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
-                class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <!--li class="nav-item"><a class="nav-link active" aria-current="page" href="#!"></a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">About</a></li-->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">All</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/mainCategory/1">상의</a></li>
-                        <li><a class="dropdown-item" href="/mainCategory/2">하의</a></li>
-                        <li><a class="dropdown-item" href="/mainCategory/3">신발</a></li>
-                        <li><a class="dropdown-item" href="/mainCategory/4">가방</a></li>
-                    </ul>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">{{mainCategoryName}}</a>
@@ -31,34 +10,7 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex">
-                {{#memberName}}
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">{{memberName}} 님</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/myPage/{{id}}">My page</a></li>
-                                <li>
-                                    <hr class="dropdown-divider"/>
-                                </li>
-                                <li><a class="dropdown-item" href="/logout">Log out</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    &nbsp
-                    <a class="btn btn-outline-dark" type="submit" role="button" href="/cart/{{id}}">
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartCount}}</span>
-                    </a>&nbsp
-                    <!--a href="/logout" role="button" class="btn btn-outline-dark">Logout</a-->
-                {{/memberName}}
-                {{^memberName}}
-                    <a href="/oauth2/authorization/google" role="button" class="btn btn-outline-dark">Google Login</a>&nbsp
-                    <a href="/oauth2/authorization/naver" role="button" class="btn btn-outline-dark">Naver Login</a>
-                {{/memberName}}
-            </form>
+{{>layout/login}}
         </div>
     </div>
 </nav>

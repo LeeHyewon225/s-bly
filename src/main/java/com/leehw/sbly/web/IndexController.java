@@ -29,7 +29,6 @@ public class IndexController {
         if(member != null) {
             model.addAttribute("memberName", member.getName());
             model.addAttribute("id", member.getId());
-            model.addAttribute("money", member.getMoney());
             model.addAttribute("cartCount", cartService.cartCount(member.getId()));
         }
 
@@ -59,7 +58,6 @@ public class IndexController {
         if(member != null) {
             model.addAttribute("memberName", member.getName());
             model.addAttribute("id", member.getId());
-            model.addAttribute("money", member.getMoney());
             model.addAttribute("cartCount", cartService.cartCount(member.getId()));
         }
         model.addAttribute("goods", goodsService.findByMainCategory(mainCategory));
@@ -74,7 +72,6 @@ public class IndexController {
         if(member != null) {
             model.addAttribute("memberName", member.getName());
             model.addAttribute("id", member.getId());
-            model.addAttribute("money", member.getMoney());
             model.addAttribute("cartCount", cartService.cartCount(member.getId()));
         }
         model.addAttribute("goods", goodsService.findByMainCategoryAndSubCategory(mainCategory, subCategory));
@@ -93,7 +90,6 @@ public class IndexController {
         if(member != null) {
             model.addAttribute("memberName", member.getName());
             model.addAttribute("id", member.getId());
-            model.addAttribute("money", member.getMoney());
             model.addAttribute("cartCount", cartService.cartCount(member.getId()));
         }
         GoodsResponseDto goods = goodsService.findById(id);
@@ -112,7 +108,6 @@ public class IndexController {
         if(member != null) {
             model.addAttribute("memberName", member.getName());
             model.addAttribute("id", member.getId());
-            model.addAttribute("money", member.getMoney());
             model.addAttribute("cartCount", cartService.cartCount(member.getId()));
             if(cartService.cartCount(member.getId())!=0)
                 model.addAttribute("cartCountIsNotZero", 1);

@@ -78,11 +78,11 @@ var main = {
         }).done(function(result){
             if(result == -1){
                 if(confirm('상품을 주문하였습니다.\n주문 내역을 확인하시겠습니까?'))
-                    window.location.href='/myPage/' + $('#member_id').val();
+                    window.location.href='/myPage/member_id=' + $('#member_id').val();
             }
             else{
                 if(confirm('보유머니가 ' + result +'원 부족합니다.\n충전하시겠습니까?'))
-                    window.location.href='/myPage/' + $('#member_id').val();
+                    window.location.href='/myPage/member_id=' + $('#member_id').val();
             }
         }).fail(function(error){
             alert(JSON.stringify(error));
@@ -103,7 +103,7 @@ var main = {
         }).done(function(result){
             if(result != -1){
                 alert('상품을 장바구니에 추가하였습니다.')
-                window.location.href='/goods/' + $('#goods_id').val();
+                window.location.href='/goods/goods_id=' + $('#goods_id').val();
             }
             else{
                 alert('이미 장바구니에 추가되어 있습니다.')
@@ -128,7 +128,7 @@ var main = {
          data: JSON.stringify(delete_cart)
         }).done(function(result){
          alert('상품을 장바구니에서 삭제하였습니다.')
-         window.location.href='/cart/' + $('#member_id').val();
+         window.location.href='/cart/member_id=' + $('#member_id').val();
         }).fail(function(error){
          alert(JSON.stringify(error));
         });
@@ -150,13 +150,13 @@ var main = {
         }).done(function(result){
          if(result == -1){
              if(confirm('상품을 주문하였습니다.\n주문 내역을 확인하시겠습니까?'))
-                window.location.href='/myPage/' + $('#member_id').val();
+                window.location.href='/myPage/member_id=' + $('#member_id').val();
              else
-                window.location.href='/cart/' + $('#member_id').val();
+                window.location.href='/cart/member_id=' + $('#member_id').val();
          }
          else{
              if(confirm('보유머니가 ' + result + '원 부족합니다.\n충전하시겠습니까?'))
-                window.location.href='/myPage/' + $('#member_id').val();
+                window.location.href='/myPage/member_id=' + $('#member_id').val();
          }
         }).fail(function(error){
          alert(JSON.stringify(error));
@@ -173,7 +173,7 @@ var main = {
             data: JSON.stringify(money)
         }).done(function(){
             alert('충전하였습니다.')
-            window.location.href='/myPage/' + $('#member_id').val();
+            window.location.href='/myPage/member_id=' + $('#member_id').val();
         }).fail(function(error){
             alert('올바른 형식을 입력해 주세요.');
         });
@@ -188,7 +188,7 @@ var main = {
             data: JSON.stringify()
         }).done(function(result){
             alert("주문을 취소하였습니다.");
-            window.location.href='/myPage/' + $('#member_id').val();
+            window.location.href='/myPage/member_id=' + $('#member_id').val();
         }).fail(function(error){
             alert(JSON.stringify(error));
         });

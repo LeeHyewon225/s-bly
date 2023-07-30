@@ -10,34 +10,7 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex">
-                {{#memberName}}
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">{{memberName}} 님</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/myPage/{{id}}">My page</a></li>
-                                <li>
-                                    <hr class="dropdown-divider"/>
-                                </li>
-                                <li><a class="dropdown-item" href="/logout">Log out</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    &nbsp
-                    <a class="btn btn-outline-dark" type="submit" role="button" href="/cart/{{id}}">
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartCount}}</span>
-                    </a>&nbsp
-                    <!--a href="/logout" role="button" class="btn btn-outline-dark">Logout</a-->
-                {{/memberName}}
-                {{^memberName}}
-                    <a href="/oauth2/authorization/google" role="button" class="btn btn-outline-dark">Google Login</a>&nbsp
-                    <a href="/oauth2/authorization/naver" role="button" class="btn btn-outline-dark">Naver Login</a>
-                {{/memberName}}
-            </form>
+{{>layout/login}}
         </div>
     </div>
 </nav>
