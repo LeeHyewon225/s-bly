@@ -53,17 +53,29 @@ public class GoodsService {
             subCategoryList.add(new GoodsSubCategory(1, "맨투맨"));
             subCategoryList.add(new GoodsSubCategory(2, "후드티"));
             subCategoryList.add(new GoodsSubCategory(3, "니트"));
-            subCategoryList.add(new GoodsSubCategory(4, "가디건"));
+            subCategoryList.add(new GoodsSubCategory(4, "셔츠"));
         } else if (mainCategory == 2) {
-            subCategoryList.add(new GoodsSubCategory(1, "반바지"));
-            subCategoryList.add(new GoodsSubCategory(2, "청바지"));
-            subCategoryList.add(new GoodsSubCategory(3, "카고바지"));
+            subCategoryList.add(new GoodsSubCategory(1, "롱팬츠"));
+            subCategoryList.add(new GoodsSubCategory(2, "숏팬츠"));
+            subCategoryList.add(new GoodsSubCategory(3, "청바지"));
+            subCategoryList.add(new GoodsSubCategory(4, "슬랙스"));
         } else if (mainCategory == 3) {
             subCategoryList.add(new GoodsSubCategory(1, "운동화"));
-            subCategoryList.add(new GoodsSubCategory(2, "구두"));
+            subCategoryList.add(new GoodsSubCategory(2, "샌들"));
+            subCategoryList.add(new GoodsSubCategory(3, "스니커즈"));
+            subCategoryList.add(new GoodsSubCategory(4, "슬리퍼"));
+            subCategoryList.add(new GoodsSubCategory(5, "워커"));
         } else if (mainCategory == 4) {
             subCategoryList.add(new GoodsSubCategory(1, "백팩"));
             subCategoryList.add(new GoodsSubCategory(2, "크로스백"));
+            subCategoryList.add(new GoodsSubCategory(3, "에코백"));
+            subCategoryList.add(new GoodsSubCategory(4, "클러치"));
+            subCategoryList.add(new GoodsSubCategory(5, "숄더백"));
+        } else if (mainCategory == 5) {
+            subCategoryList.add(new GoodsSubCategory(1, "모자"));
+            subCategoryList.add(new GoodsSubCategory(2, "양말"));
+            subCategoryList.add(new GoodsSubCategory(3, "시계"));
+            subCategoryList.add(new GoodsSubCategory(4, "장갑"));
         }
         return subCategoryList;
     }
@@ -78,6 +90,8 @@ public class GoodsService {
             return "신발";
         else if (mainCategory == 4)
             return "가방";
+        else if (mainCategory == 5)
+            return "패션 소품";
         else
             return "";
     }
