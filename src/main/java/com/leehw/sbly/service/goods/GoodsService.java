@@ -4,6 +4,7 @@ import com.leehw.sbly.domain.goods.Goods;
 import com.leehw.sbly.domain.goods.GoodsRepository;
 import com.leehw.sbly.web.Dto.goods.GoodsListResponseDto;
 import com.leehw.sbly.web.Dto.goods.GoodsResponseDto;
+import com.leehw.sbly.web.Dto.goods.GoodsSubCategoryResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,35 +48,35 @@ public class GoodsService {
     }
 
     @Transactional
-    public List<GoodsSubCategory> getSubCategory(int mainCategory) {
-        List<GoodsSubCategory> subCategoryList = new ArrayList<>();
+    public List<GoodsSubCategoryResponseDto> getSubCategory(int mainCategory) {
+        List<GoodsSubCategoryResponseDto> subCategoryList = new ArrayList<>();
         if (mainCategory == 1) {
-            subCategoryList.add(new GoodsSubCategory(1, "맨투맨"));
-            subCategoryList.add(new GoodsSubCategory(2, "후드티"));
-            subCategoryList.add(new GoodsSubCategory(3, "니트"));
-            subCategoryList.add(new GoodsSubCategory(4, "셔츠"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(1, "맨투맨"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(2, "후드티"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(3, "니트"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(4, "셔츠"));
         } else if (mainCategory == 2) {
-            subCategoryList.add(new GoodsSubCategory(1, "롱팬츠"));
-            subCategoryList.add(new GoodsSubCategory(2, "숏팬츠"));
-            subCategoryList.add(new GoodsSubCategory(3, "청바지"));
-            subCategoryList.add(new GoodsSubCategory(4, "슬랙스"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(1, "롱팬츠"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(2, "숏팬츠"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(3, "청바지"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(4, "슬랙스"));
         } else if (mainCategory == 3) {
-            subCategoryList.add(new GoodsSubCategory(1, "운동화"));
-            subCategoryList.add(new GoodsSubCategory(2, "샌들"));
-            subCategoryList.add(new GoodsSubCategory(3, "스니커즈"));
-            subCategoryList.add(new GoodsSubCategory(4, "슬리퍼"));
-            subCategoryList.add(new GoodsSubCategory(5, "워커"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(1, "운동화"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(2, "샌들"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(3, "스니커즈"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(4, "슬리퍼"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(5, "워커"));
         } else if (mainCategory == 4) {
-            subCategoryList.add(new GoodsSubCategory(1, "백팩"));
-            subCategoryList.add(new GoodsSubCategory(2, "크로스백"));
-            subCategoryList.add(new GoodsSubCategory(3, "에코백"));
-            subCategoryList.add(new GoodsSubCategory(4, "클러치"));
-            subCategoryList.add(new GoodsSubCategory(5, "숄더백"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(1, "백팩"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(2, "크로스백"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(3, "에코백"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(4, "클러치"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(5, "숄더백"));
         } else if (mainCategory == 5) {
-            subCategoryList.add(new GoodsSubCategory(1, "모자"));
-            subCategoryList.add(new GoodsSubCategory(2, "양말"));
-            subCategoryList.add(new GoodsSubCategory(3, "시계"));
-            subCategoryList.add(new GoodsSubCategory(4, "장갑"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(1, "모자"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(2, "양말"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(3, "시계"));
+            subCategoryList.add(new GoodsSubCategoryResponseDto(4, "장갑"));
         }
         return subCategoryList;
     }

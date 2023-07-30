@@ -4,7 +4,6 @@ import com.leehw.sbly.config.auth.Dto.SessionMember;
 import com.leehw.sbly.config.auth.LoginMember;
 import com.leehw.sbly.service.cart.CartService;
 import com.leehw.sbly.service.goods.GoodsService;
-import com.leehw.sbly.service.goods.GoodsSubCategory;
 import com.leehw.sbly.service.orders.OrdersService;
 import com.leehw.sbly.web.Dto.cart.CartResponseDto;
 import com.leehw.sbly.web.Dto.goods.GoodsResponseDto;
@@ -14,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
-
+import com.leehw.sbly.web.Dto.goods.GoodsSubCategoryResponseDto;
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
@@ -78,7 +77,7 @@ public class IndexController {
         model.addAttribute("mainCategoryName", goodsService.getMainCategoryName(mainCategory));
         model.addAttribute("mainCategory", mainCategory);
         model.addAttribute("subCategory_id", subCategory);
-        List<GoodsSubCategory> subCategoryList =  goodsService.getSubCategory(mainCategory);
+        List<GoodsSubCategoryResponseDto> subCategoryList =  goodsService.getSubCategory(mainCategory);
         model.addAttribute("subCategory", subCategoryList);
         model.addAttribute("subCategoryName", subCategoryList.get(subCategory - 1).getSubCategory_name());
         return "subCategory";
@@ -94,7 +93,7 @@ public class IndexController {
         }
         GoodsResponseDto goods = goodsService.findById(id);
         model.addAttribute("goods", goods);
-        List<GoodsSubCategory> subCategoryList =  goodsService.getSubCategory(goods.getMainCategory());
+        List<GoodsSubCategoryResponseDto> subCategoryList =  goodsService.getSubCategory(goods.getMainCategory());
         model.addAttribute("subCategory", subCategoryList);
         model.addAttribute("mainCategoryName", goodsService.getMainCategoryName(goods.getMainCategory()));
         model.addAttribute("subCategoryName", subCategoryList.get(goods.getSubCategory() - 1).getSubCategory_name());
