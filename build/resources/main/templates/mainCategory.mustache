@@ -5,7 +5,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {{#subCategory}}
                             <li><a class="dropdown-item"
-                                   href="/subCategory/{{mainCategory}}/{{subCategory_id}}">{{subCategory_name}}</a></li>
+                                   href="/subCategory/mainCategory_id={{mainCategory}}/subCategory_id={{subCategory_id}}">{{subCategory_name}}</a></li>
                         {{/subCategory}}
                     </ul>
                 </li>
@@ -43,7 +43,7 @@
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/goods/{{id}}">View
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/goods/goods_id={{id}}">View
                                 options</a></div>
                         </div>
                     </div>

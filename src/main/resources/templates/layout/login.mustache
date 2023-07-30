@@ -14,12 +14,11 @@
             </li>
         </ul>
         &nbsp
-        <a class="btn btn-outline-dark" type="submit" role="button" href="/cart/{{id}}">
+        <a class="btn btn-outline-dark" type="submit" role="button" href="/cart/member_id={{id}}">
             <i class="bi-cart-fill me-1"></i>
             Cart
             <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartCount}}</span>
         </a>&nbsp
-        <!--a href="/logout" role="button" class="btn btn-outline-dark">Logout</a-->
     {{/memberName}}
     {{^memberName}}
         <a href="/oauth2/authorization/google" role="button" class="btn btn-outline-dark">Google Login</a>&nbsp

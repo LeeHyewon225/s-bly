@@ -37,7 +37,7 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/myPage/{id}")
+    @GetMapping("/myPage/member_id={id}")
     public String myPage(@PathVariable Long id, Model model, @LoginMember SessionMember member){
         if(member != null) {
             model.addAttribute("memberName", member.getName());
@@ -53,7 +53,7 @@ public class IndexController {
         return "myPage";
     }
 
-    @GetMapping("/mainCategory/{mainCategory}")
+    @GetMapping("/mainCategory/mainCategory_id={mainCategory}")
     public String mainCategory(@PathVariable int mainCategory, Model model, @LoginMember SessionMember member){
         if(member != null) {
             model.addAttribute("memberName", member.getName());
@@ -67,7 +67,7 @@ public class IndexController {
         return "mainCategory";
     }
 
-    @GetMapping("/subCategory/{mainCategory}/{subCategory}")
+    @GetMapping("/subCategory/mainCategory_id={mainCategory}/subCategory_id={subCategory}")
     public String subCategory(@PathVariable int mainCategory, @PathVariable int subCategory, Model model, @LoginMember SessionMember member){
         if(member != null) {
             model.addAttribute("memberName", member.getName());
@@ -75,16 +75,16 @@ public class IndexController {
             model.addAttribute("cartCount", cartService.cartCount(member.getId()));
         }
         model.addAttribute("goods", goodsService.findByMainCategoryAndSubCategory(mainCategory, subCategory));
-        List<GoodsSubCategory> subCategoryList =  goodsService.getSubCategory(mainCategory);
-        model.addAttribute("subCategory", subCategoryList);
         model.addAttribute("mainCategoryName", goodsService.getMainCategoryName(mainCategory));
-        model.addAttribute("subCategoryName", subCategoryList.get(subCategory - 1).getSubCategory_name());
         model.addAttribute("mainCategory", mainCategory);
         model.addAttribute("subCategory_id", subCategory);
+        List<GoodsSubCategory> subCategoryList =  goodsService.getSubCategory(mainCategory);
+        model.addAttribute("subCategory", subCategoryList);
+        model.addAttribute("subCategoryName", subCategoryList.get(subCategory - 1).getSubCategory_name());
         return "subCategory";
     }
 
-    @GetMapping("/goods/{id}")
+    @GetMapping("/goods/goods_id={id}")
     public String goods(@PathVariable Long id, Model model, @LoginMember SessionMember member)
     {
         if(member != null) {
@@ -103,7 +103,7 @@ public class IndexController {
         return "goods";
     }
 
-    @GetMapping("/cart/{id}")
+    @GetMapping("/cart/member_id={id}")
     public String cart(@PathVariable Long id, Model model, @LoginMember SessionMember member){
         if(member != null) {
             model.addAttribute("memberName", member.getName());
