@@ -66,8 +66,8 @@ public class OrdersServiceTest {
                 .deliveryTime(deliveryTime).build();
         goodsRepository.save(goods);
 
-        int deliver= 0;
-        int cancelOrder = 0;
+        boolean deliver= false;
+        boolean cancelOrder = false;
         Orders orders = Orders.builder()
                 .member(member)
                 .goods(goods)
@@ -77,9 +77,9 @@ public class OrdersServiceTest {
         ordersRepository.save(orders);
         orders.setCreatedDate(2023, 7,11);
 
-        OrderResponseDto responseDto = ordersService.findByMemberId(member.getId()).get(0);
+        OrderResponseDto responseDto = ordersService.findByMemberId(member.getId(), false).get(0);
 
         assertThat(responseDto.getMember()).isEqualTo(member);
-        assertThat(responseDto.getDeliver()).isEqualTo(1);
+        assertThat(responseDto.isDeliver()).isEqualTo(1);
     }
 }

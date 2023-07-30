@@ -186,8 +186,8 @@ public class OrdersApiControllerTest {
                 .deliveryTime(deliveryTime).build();
         goodsRepository.save(goods);
 
-        int deliver= 0;
-        int cancelOrder = 0;
+        boolean deliver= false;
+        boolean cancelOrder = false;
         Orders orders = Orders.builder()
                 .member(member)
                 .goods(goods)
@@ -202,6 +202,6 @@ public class OrdersApiControllerTest {
         mvc.perform(put(url))
                 .andExpect(status().isOk());
 
-        assertThat(orders.getCancelOrder()).isEqualTo(1);
+        assertThat(orders.isCancelOrder()).isEqualTo(true);
     }
 }

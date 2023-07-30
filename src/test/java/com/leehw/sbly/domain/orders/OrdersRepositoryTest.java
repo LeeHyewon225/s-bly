@@ -61,8 +61,8 @@ public class OrdersRepositoryTest {
                 .deliveryTime(deliveryTime).build();
         goodsRepository.save(goods);
 
-        int deliver= 0;
-        int cancelOrder = 0;
+        boolean deliver= false;
+        boolean cancelOrder = false;
         ordersRepository.save(Orders.builder().member(member).goods(goods).deliver(deliver).cancelOrder(cancelOrder).build());
 
         List<Orders> ordersList = ordersRepository.findAll();
@@ -70,7 +70,7 @@ public class OrdersRepositoryTest {
 
         assertThat(orders.getMember()).isEqualTo(member);
         assertThat(orders.getGoods()).isEqualTo(goods);
-        assertThat(orders.getDeliver()).isEqualTo(deliver);
-        assertThat(orders.getCancelOrder()).isEqualTo(cancelOrder);
+        assertThat(orders.isDeliver()).isEqualTo(deliver);
+        assertThat(orders.isCancelOrder()).isEqualTo(cancelOrder);
     }
 }
