@@ -46,9 +46,9 @@ public class IndexController {
             model.addAttribute("cartCount", cartService.cartCount(member.getId()));
         }
         //주문 내역
-        model.addAttribute("orders", ordersService.findByMemberId(id, false));
+        model.addAttribute("orders", ordersService.findByMemberIdAndCancelOrderOrder(id, false));
         //주문 취소 내역
-        model.addAttribute("cancelOrders", ordersService.findByMemberId(id, true));
+        model.addAttribute("cancelOrders", ordersService.findByMemberIdAndCancelOrderOrder(id, true));
         return "myPage";
     }
 

@@ -49,7 +49,7 @@ public class Member{
         return this;
     }
 
-    public void pricecalculate(long price){
+    public void priceCalculate(long price){
         money -= price;
     }
 

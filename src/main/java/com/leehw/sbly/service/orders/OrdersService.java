@@ -36,7 +36,7 @@ public class OrdersService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다. id = " + goods_id));
         if (member.getMoney() < goods.getPrice())
             return goods.getPrice() - member.getMoney();
-        member.pricecalculate(goods.getPrice());
+        member.priceCalculate(goods.getPrice());
         ordersRepository.save(Orders.builder()
                 .member(member)
                 .goods(goods)
@@ -55,22 +55,24 @@ public class OrdersService {
     }
 
     @Transactional(readOnly = true)
-    public List<OrderResponseDto> findByMemberId(Long id, boolean cancelOrder) {
+    public List<OrderResponseDto> findByMemberIdAndCancelOrderOrder(Long id, boolean cancelOrder) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. + id = " + id));
 
-        List<Orders> ordersList = ordersRepository.findByMemberAndCancelOrderOrderByCreatedDateDesc(member, cancelOrder);
-        for (Orders orders : ordersList) {
-            if (orders.isDeliver() == false)
-                orders.calculateDelivery();
+        if (cancelOrder) {
+            return ordersRepository.findByMemberAndCancelOrderOrderByModifiedDateDesc(member, true).stream()
+                    .map(OrderResponseDto::new)
+                    .collect(Collectors.toList());
         }
-        if (cancelOrder)
-            return ordersRepository.findByMemberAndCancelOrderOrderByModifiedDateDesc(member, cancelOrder).stream()
+        else {
+            List<Orders> ordersList = ordersRepository.findByMemberAndCancelOrderOrderByCreatedDateDesc(member, false);
+            for (Orders orders : ordersList) {
+                if (orders.isDeliver() == false)
+                    orders.calculateDelivery();
+            }
+            return ordersList.stream()
                     .map(OrderResponseDto::new)
                     .collect(Collectors.toList());
-        else
-            return ordersRepository.findByMemberAndCancelOrderOrderByCreatedDateDesc(member, cancelOrder).stream()
-                    .map(OrderResponseDto::new)
-                    .collect(Collectors.toList());
+        }
     }
 }

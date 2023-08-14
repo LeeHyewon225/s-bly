@@ -64,7 +64,7 @@ public class CartService {
         }
         if (price_sum > member.getMoney())
             return  price_sum - member.getMoney();
-        member.pricecalculate(price_sum);
+        member.priceCalculate(price_sum);
         for (Long i : orderCart) {
             Cart cart = cartRepository.findById(i)
                     .orElseThrow(() -> new IllegalArgumentException("해당 장바구니 상품이 없습니다. id +" + i));

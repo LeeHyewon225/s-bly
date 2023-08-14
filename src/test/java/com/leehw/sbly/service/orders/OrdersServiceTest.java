@@ -77,9 +77,9 @@ public class OrdersServiceTest {
         ordersRepository.save(orders);
         orders.setCreatedDate(2023, 7,11);
 
-        OrderResponseDto responseDto = ordersService.findByMemberId(member.getId(), false).get(0);
+        OrderResponseDto responseDto = ordersService.findByMemberIdAndCancelOrderOrder(member.getId(), false).get(0);
 
         assertThat(responseDto.getMember()).isEqualTo(member);
-        assertThat(responseDto.isDeliver()).isEqualTo(1);
+        assertThat(responseDto.isDeliver()).isEqualTo(true);
     }
 }

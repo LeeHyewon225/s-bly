@@ -1,6 +1,7 @@
 package com.leehw.sbly.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.leehw.sbly.config.auth.Dto.SessionMember;
 import com.leehw.sbly.domain.goods.Goods;
 import com.leehw.sbly.domain.goods.GoodsRepository;
 import com.leehw.sbly.domain.member.Member;
@@ -18,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -53,6 +55,8 @@ public class OrdersApiControllerTest {
     private WebApplicationContext context;
 
     private MockMvc mvc;
+
+    private MockHttpSession session = new MockHttpSession();
 
     @Before
     public void setup(){
@@ -198,8 +202,8 @@ public class OrdersApiControllerTest {
         Long id = orders.getId();
 
         String url = "http://localhost:" + port + "/api/orders/" + id;
-
-        mvc.perform(put(url))
+        session.setAttribute("member", new SessionMember(member));
+        mvc.perform(put(url).session(session))
                 .andExpect(status().isOk());
 
         assertThat(orders.isCancelOrder()).isEqualTo(true);
