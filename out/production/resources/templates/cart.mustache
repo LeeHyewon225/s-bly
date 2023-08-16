@@ -1,0 +1,55 @@
+{{>layout/header}}
+{{>layout/login}}
+<br>
+<br>
+<div class="list-group list-group-radio d-grid gap-2 border-0 w-auto">
+    <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+        <i class="bi bi-cart-fill"></i>
+    </div>
+    <br>
+    {{#cartCountIsNotZero}}
+        <div class="position-relative">
+            전체 선택 <input type="checkbox" id="checkAll">
+        </div>
+    {{/cartCountIsNotZero}}
+    {{#cartList}}
+        <div class="position-relative">
+            <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="checkbox"
+                   name="listGroupRadioGrid" value="{{id}}">
+            <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid1">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0"
+                                               src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..."/></div>
+                    <div class="col-md-4">
+                        <strong class="fw-semibold">{{goods.name}}</strong>
+                        <span class="d-block small opacity-75">{{goods.price}} 원</span>
+                    </div>
+                    <div class="col-md-4">
+                        &nbsp&nbsp&nbsp<a class="btn btn-outline-dark mt-auto" href="/goods/goods_id={{goods.id}}">View
+                        options</a>
+                    </div>
+                </div>
+            </label>
+        </div>
+    {{/cartList}}
+    {{^cartList}}
+        장바구니가 비었습니다.<br>
+    {{/cartList}}
+    {{#cartCountIsNotZero}}
+        <br>
+        <div class="d-flex">
+            <button class="btn btn-outline-dark flex-shrink-0" type="button" id="order-cart">
+                <i class="bi bi-credit-card-fill"></i>
+                &nbspBuy Now
+            </button>
+            &nbsp&nbsp&nbsp
+            <button class="btn btn-outline-dark flex-shrink-0" type="button" id="delete-cart">
+                <i class="bi bi-x-square-fill"></i>
+                Delete
+            </button>
+        </div>
+    {{/cartCountIsNotZero}}
+</div>
+<br><br>
+<input type="hidden" id="member_id" value="{{id}}">
+{{>layout/footer}}
