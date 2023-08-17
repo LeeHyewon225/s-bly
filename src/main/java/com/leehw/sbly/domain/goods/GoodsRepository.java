@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface GoodsRepository extends JpaRepository<Goods, Long> {
 
-    @Query(value = "select * from Goods d order by RAND() limit 8", nativeQuery = true)
+    @Query(value = "select * from goods d order by RAND() limit 8", nativeQuery = true)
     List<Goods> findAllRAND();
 
     List<Goods> findByMainCategory(int mainCategory);
